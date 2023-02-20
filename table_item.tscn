@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2v8yme3btu6f"]
+
+[ext_resource type="Texture2D" uid="uid://r1plrsirowa8" path="res://textures/unknown_icon.png" id="1_k3t1a"]
+
+[sub_resource type="GDScript" id="GDScript_noiqj"]
+script/source = "extends HBoxContainer
+
+@onready var texture_rect = %TextureRect
+@onready var label_name:Button = %LabelName
+@onready var label_count:Button = %LabelCount
+
+
+var entry:Dictionary
+
+func set_entry(entry:Dictionary):
+	self.entry = entry
+	tooltip_text = entry[\"item\"]
+	label_name.text = entry[\"item\"]
+	label_count.text = str(entry[\"countDelta\"])
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_araqp"]
+bg_color = Color(0.415686, 0.415686, 0.415686, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="TableItem" type="HBoxContainer"]
+custom_minimum_size = Vector2(300, 40)
+anchors_preset = -1
+anchor_right = 0.725
+anchor_bottom = 0.08
+offset_right = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 15
+size_flags_vertical = 0
+script = SubResource("GDScript_noiqj")
+metadata/_edit_vertical_guides_ = [300.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+metadata/_edit_use_anchors_ = true
+
+[node name="IconPane" type="Panel" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_araqp")
+
+[node name="TextureRect" type="TextureRect" parent="IconPane"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_k3t1a")
+stretch_mode = 3
+
+[node name="LabelName" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "oooooo  oooooo ooo oooooo oooooo asdasdasdasdasd"
+alignment = 0
+text_overrun_behavior = 3
+
+[node name="LabelCount" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
+text = "-99999"
