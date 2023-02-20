@@ -5,8 +5,8 @@ export_presets.cfg
 
 *.exe
 log.json
-exported/
-.godot/
+exported/*
+.godot/*
 
 # Imported translations (automatically generated from CSV files)
 *.translation
@@ -14,3 +14,4 @@ exported/
 # Mono-specific ignores
 .mono/
 data_*/
+AlbionLogReader.pck
