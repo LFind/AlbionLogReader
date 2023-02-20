@@ -6,17 +6,21 @@
 script/source = "extends HBoxContainer
 
 @onready var texture_rect = %TextureRect
-@onready var label_name:Button = %LabelName
-@onready var label_count:Button = %LabelCount
-
+@onready var button_name = %ButtonName
+@onready var button_count = %ButtonCount
 
 var entry:Dictionary
+
+func _ready():
+	button_name.pressed.connect(func():
+		Event.request_window_item_info.emit(entry[\"item\"])
+		)
 
 func set_entry(entry:Dictionary):
 	self.entry = entry
 	tooltip_text = entry[\"item\"]
-	label_name.text = entry[\"item\"]
-	label_count.text = str(entry[\"countDelta\"])
+	button_name.text = entry[\"item\"]
+	button_count.text = str(entry[\"countDelta\"])
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_araqp"]
@@ -58,7 +62,7 @@ grow_vertical = 2
 texture = ExtResource("1_k3t1a")
 stretch_mode = 3
 
-[node name="LabelName" type="Button" parent="."]
+[node name="ButtonName" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -68,10 +72,13 @@ text = "oooooo  oooooo ooo oooooo oooooo asdasdasdasdasd"
 alignment = 0
 text_overrun_behavior = 3
 
-[node name="LabelCount" type="Button" parent="."]
+[node name="ButtonCount" type="Button" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 2
 text = "-99999"
+
+[node name="WindowItemInfo" type="Window" parent="."]
+visible = false
