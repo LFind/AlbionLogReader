@@ -33,6 +33,7 @@ func _ready():
 				node.visible = new_text.to_lower() in node.entry[\"item\"].to_lower()
 		)
 	
+	search_field.clear()
 	LogData.load_log(LogData.PATH)
 	
 	pass
