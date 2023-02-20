@@ -3,6 +3,11 @@
 export.cfg
 export_presets.cfg
 
+*.exe
+log.json
+exported/
+.godot/
+
 # Imported translations (automatically generated from CSV files)
 *.translation
 
