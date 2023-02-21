@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://b4wyjdmuir1vo"]
-
-[node name="ItemInfoPane" type="Panel"]
-anchors_preset = -1
-anchor_right = 1.24
-anchor_bottom = 0.528
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="AlbionLogReader"
-run/main_scene="res://Table.tscn"
+run/main_scene="res://scenes/Table.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 boot_splash/show_image=false
 config/icon="res://icon.svg"
@@ -23,14 +23,14 @@ Event="*res://Event.gd"
 
 [display]
 
-window/size/viewport_width=400
-window/size/viewport_height=500
+window/size/viewport_width=560
+window/size/viewport_height=560
 window/size/resizable=false
 window/subwindows/embed_subwindows=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/SmoothScroll/plugin.cfg", "res://addons/SimpleTODO/plugin.cfg", "res://addons/CursorShapePreviewer/plugin.cfg")
+enabled=PackedStringArray("res://addons/SmoothScroll/plugin.cfg", "res://addons/CursorShapePreviewer/plugin.cfg")
 
 [input]
 
