@@ -27,7 +27,6 @@ func is_valid_log_string(log_string: String) -> bool:
 		return false
 	return true
 
-
 func parse(logString: String) -> Dictionary:
 	var logs = {}
 	
@@ -100,12 +99,10 @@ func append_logs(logs_new: Dictionary) -> Dictionary:
 	save_log(PATH)
 	return merged_logs
 
-
 func save_log(path:String):
 	var file = FileAccess.open(path,FileAccess.WRITE)
 	file.store_string(str(log_data))
 	file.flush()
-
 
 func load_log(path:String) -> Dictionary:
 	var data:Dictionary = {}
@@ -118,22 +115,14 @@ func load_log(path:String) -> Dictionary:
 	self.log_data = data
 	return data
 
-
 func get_item_count(item_name: String, char: int = 0) -> int:
 	var count_delta_sum = 0
 	
-	# Обходим все записи в словаре
-	for date in log_data.keys():
-		for entry in log_data[date]:
-			if entry["item"] == item_name:
-				if char > 0:
-					if entry["char"] == char:
-						count_delta_sum += entry["countDelta"]
-				else:
-					count_delta_sum += entry["countDelta"]
+	for entries in get_entries(item_name, "", char).values():
+		for entry in entries:
+			count_delta_sum += entry["countDelta"]
 	
 	return count_delta_sum
-
 
 func get_entries(item_name: String, player: String = "", char: int = -1, quality: int = -1) -> Dictionary:
 	var entries = {}
@@ -159,7 +148,7 @@ func get_entries(item_name: String, player: String = "", char: int = -1, quality
 	
 	return entries
 
-
+#FIXME Не корректно складывает. Может удалить?
 func merge_logs(logs: Dictionary) -> Array:
 	var merged = {}
 	
@@ -184,7 +173,6 @@ func merge_logs(logs: Dictionary) -> Array:
 	
 	return merged.values()
 
-
 func get_existing_items(logs:Dictionary) -> Array:
 	var existing_items = []
 	for entry_list in logs.values():
@@ -192,3 +180,11 @@ func get_existing_items(logs:Dictionary) -> Array:
 			if entry["item"] not in existing_items:
 				existing_items.append(entry["item"])
 	return existing_items
+
+func get_unique_players(logs) -> Array[String]:
+	var unique_players:Array[String]
+	for entries in logs.values():
+		for entry in entries:
+			if entry["player"] not in unique_players:
+				unique_players.append(entry["player"])
+	return unique_players
