@@ -1,22 +1,29 @@
 [gd_scene load_steps=4 format=3 uid="uid://c2v8yme3btu6f"]
 
-[ext_resource type="Texture2D" uid="uid://r1plrsirowa8" path="res://textures/unknown_icon.png" id="1_k3t1a"]
+[ext_resource type="Texture2D" uid="uid://r1plrsirowa8" path="res://textures/unknown_icon.png" id="1_hqfxg"]
 
 [sub_resource type="GDScript" id="GDScript_noiqj"]
 script/source = "extends HBoxContainer
 
 @onready var texture_rect = %TextureRect
-@onready var label_name:Button = %LabelName
-@onready var label_count:Button = %LabelCount
-
+@onready var button_name = %ButtonName
+@onready var button_count = %ButtonCount
 
 var entry:Dictionary
+var item:String
 
-func set_entry(entry:Dictionary):
-	self.entry = entry
-	tooltip_text = entry[\"item\"]
-	label_name.text = entry[\"item\"]
-	label_count.text = str(entry[\"countDelta\"])
+func _ready():
+	button_name.pressed.connect(func():
+		Event.request_window_item_info.emit(item)
+		)
+	
+
+func set_item(item:String):
+	self.item = item
+	self.entry = LogData.get_entries(item)
+	tooltip_text = item
+	button_name.text = item
+	button_count.text = str(LogData.get_item_count(item))
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_araqp"]
@@ -29,9 +36,9 @@ corner_radius_bottom_left = 3
 [node name="TableItem" type="HBoxContainer"]
 custom_minimum_size = Vector2(300, 40)
 anchors_preset = -1
-anchor_right = 0.725
+anchor_right = 0.75
 anchor_bottom = 0.08
-offset_right = 10.0
+offset_right = -3.05176e-05
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 15
@@ -39,7 +46,6 @@ size_flags_vertical = 0
 script = SubResource("GDScript_noiqj")
 metadata/_edit_vertical_guides_ = [300.0]
 metadata/_edit_horizontal_guides_ = [40.0]
-metadata/_edit_use_anchors_ = true
 
 [node name="IconPane" type="Panel" parent="."]
 custom_minimum_size = Vector2(40, 40)
@@ -55,10 +61,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_k3t1a")
+texture = ExtResource("1_hqfxg")
 stretch_mode = 3
 
-[node name="LabelName" type="Button" parent="."]
+[node name="ButtonName" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -68,7 +74,7 @@ text = "oooooo  oooooo ooo oooooo oooooo asdasdasdasdasd"
 alignment = 0
 text_overrun_behavior = 3
 
-[node name="LabelCount" type="Button" parent="."]
+[node name="ButtonCount" type="Button" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
