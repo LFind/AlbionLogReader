@@ -21,7 +21,7 @@ var sorter:Sort
 func _ready():
 	DisplayServer.window_set_size(Vector2i(size))
 	DisplayServer.window_can_draw()
-	Event.items_update.connect(_update)
+	Event.update_logs.connect(_update)
 	
 	button_add_log.pressed.connect(func():
 		LogData.append_logs(LogData.parse(DisplayServer.clipboard_get()))
@@ -114,7 +114,7 @@ func _update():
 	for node in container_items.get_children():
 		node.queue_free()
 	
-	for item in LogData.get_existing_items(LogData.log_data):
+	for item in LogData.get_unique_items(LogData.log_data):
 		var scene = preload("res://scenes/elements/table_item.tscn").instantiate()
 		scene.set_item(item)
 		item_nodes.append(scene)
