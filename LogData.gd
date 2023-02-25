@@ -3,7 +3,7 @@ extends Node
 var log_data:Dictionary:
 	set(value):
 		log_data = sort_by_date(value)
-		Event.items_update.emit()
+		Event.update_logs.emit()
 const PATH:String = "log.json"
 var files:Dictionary = {}
 
@@ -97,7 +97,7 @@ func append_logs(logs_new: Dictionary) -> Dictionary:
 			merged_logs[date] = logs_new[date]
 	
 	log_data = merged_logs
-	Event.items_update.emit()
+	Event.update_logs.emit()
 	save_log(PATH)
 	return merged_logs
 
@@ -155,7 +155,7 @@ func get_entries(item_name: String, player: String = "", char: int = -1, quality
 	return entries
 
 
-func get_existing_items(logs:Dictionary) -> Array:
+func get_unique_items(logs:Dictionary) -> Array:
 	var existing_items = []
 	for entry_list in logs.values():
 		for entry in entry_list:
@@ -245,7 +245,7 @@ func sort_by_date(logs:Dictionary) -> Dictionary:
 
 #FIXME Некорректная сортировка по предмету (удалить за ненадобностью?)
 func sort_by_item(log_data: Dictionary) -> Dictionary:
-	var items = get_existing_items(log_data)
+	var items = get_unique_items(log_data)
 	var sorted_logs:Dictionary
 	
 	items.sort()
