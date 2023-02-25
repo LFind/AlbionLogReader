@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+ItemData="*res://ItemData.gd"
 LogData="*res://LogData.gd"
 Event="*res://Event.gd"
 
