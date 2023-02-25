@@ -94,7 +94,7 @@ SplitContainer/icons/h_grabber = ExtResource("2_vhx57")
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cqnq"]
 bg_color = Color(0.212305, 0.212305, 0.212305, 1)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_tdgq1"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_fr8vr"]
 
 [node name="ItemInfoPane" type="Panel"]
 custom_minimum_size = Vector2(560, 560)
@@ -289,7 +289,7 @@ unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
-button_group = SubResource("ButtonGroup_tdgq1")
+button_group = SubResource("ButtonGroup_fr8vr")
 text = "Дата"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer"]
@@ -302,7 +302,7 @@ unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
-button_group = SubResource("ButtonGroup_tdgq1")
+button_group = SubResource("ButtonGroup_fr8vr")
 text = "Игрок"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer"]
@@ -315,7 +315,7 @@ unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
-button_group = SubResource("ButtonGroup_tdgq1")
+button_group = SubResource("ButtonGroup_fr8vr")
 text = "Предмет"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer"]
@@ -328,7 +328,7 @@ unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
-button_group = SubResource("ButtonGroup_tdgq1")
+button_group = SubResource("ButtonGroup_fr8vr")
 text = "Чары"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
@@ -341,7 +341,7 @@ unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
-button_group = SubResource("ButtonGroup_tdgq1")
+button_group = SubResource("ButtonGroup_fr8vr")
 text = "Качество"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
@@ -354,7 +354,7 @@ unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
-button_group = SubResource("ButtonGroup_tdgq1")
+button_group = SubResource("ButtonGroup_fr8vr")
 text = "Количество"
 
 [node name="Panel" type="Control" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer"]

@@ -1,27 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmimt1gnb1qkp"]
+[gd_scene load_steps=6 format=3 uid="uid://cqrtmlj61e8iv"]
 
 [ext_resource type="Script" path="res://scenes/Table.gd" id="1_fnb8e"]
+[ext_resource type="Theme" uid="uid://bm4dl3c55ph6g" path="res://Theme.tres" id="1_nq4w7"]
 [ext_resource type="Script" path="res://addons/SmoothScroll/SmoothScrollContainer.gd" id="2_v8b5g"]
 [ext_resource type="PackedScene" uid="uid://c2v8yme3btu6f" path="res://scenes/elements/table_item.tscn" id="3_r1qcw"]
 [ext_resource type="Script" path="res://scenes/WindowItemInfo.gd" id="4_e74w6"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wy7ob"]
-bg_color = Color(0.212305, 0.212305, 0.212305, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfoa1"]
-content_margin_left = 5.0
-content_margin_right = 5.0
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l40fq"]
-bg_color = Color(0.364706, 0.364706, 0.364706, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -30,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_nq4w7")
 script = ExtResource("1_fnb8e")
 
 [node name="PanelTable" type="Panel" parent="."]
@@ -42,7 +26,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_wy7ob")
 metadata/_edit_vertical_guides_ = [325.0]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelTable"]
@@ -54,27 +37,41 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="MarginContainerSearch" type="MarginContainer" parent="PanelTable/VBoxContainer"]
+[node name="SearchContainer" type="MarginContainer" parent="PanelTable/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 
-[node name="SearchField" type="LineEdit" parent="PanelTable/VBoxContainer/MarginContainerSearch"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelTable/VBoxContainer/SearchContainer"]
+layout_mode = 2
+
+[node name="SearchField" type="LineEdit" parent="PanelTable/VBoxContainer/SearchContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
-theme_override_colors/font_placeholder_color = Color(0.212305, 0.212305, 0.212305, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_vfoa1")
-theme_override_styles/focus = SubResource("StyleBoxFlat_vfoa1")
+size_flags_horizontal = 3
 text = "фывфывфыв"
 placeholder_text = "Поиск..."
 select_all_on_focus = true
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelTable/VBoxContainer"]
+[node name="SortOption" type="OptionButton" parent="PanelTable/VBoxContainer/SearchContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+focus_mode = 1
+toggle_mode = false
+alignment = 1
+text_overrun_behavior = 3
+icon_alignment = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "Тип сортировки"
+popup/item_0/id = 1
+
+[node name="TableContainer" type="MarginContainer" parent="PanelTable/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
@@ -83,13 +80,13 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="Panel" type="Panel" parent="PanelTable/VBoxContainer/MarginContainer"]
+[node name="Panel" type="Panel" parent="PanelTable/VBoxContainer/TableContainer"]
 clip_contents = true
 layout_mode = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_l40fq")
+theme_type_variation = &"PanelGray"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelTable/VBoxContainer/MarginContainer/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelTable/VBoxContainer/TableContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -97,28 +94,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/separation = 2
+theme_override_constants/separation = 0
 
-[node name="SortOption" type="OptionButton" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(176, 0)
-layout_mode = 2
-toggle_mode = false
-alignment = 2
-icon_alignment = 2
-item_count = 1
-selected = 0
-popup/item_0/text = ""
-popup/item_0/id = 1
-
-[node name="SmoothScrollContainer2" type="ScrollContainer" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer"]
-clip_contents = false
+[node name="SmoothScrollContainer2" type="ScrollContainer" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 follow_focus = true
 script = ExtResource("2_v8b5g")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 5
@@ -126,96 +110,96 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="ItemsContainer" type="VBoxContainer" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer"]
+[node name="ItemsContainer" type="VBoxContainer" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 metadata/_edit_group_ = true
 
-[node name="TableItem" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem2" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem2" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem3" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem3" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem4" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem4" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem5" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem5" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem6" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem6" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem7" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem7" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem8" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem8" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem9" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem9" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem10" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem10" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem11" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem11" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem12" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem12" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem13" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem13" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem14" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem14" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem15" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem15" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem16" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem16" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem17" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem17" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem18" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem18" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem19" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem19" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem20" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem20" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem21" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem21" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 
-[node name="TableItem22" parent="PanelTable/VBoxContainer/MarginContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
+[node name="TableItem22" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 

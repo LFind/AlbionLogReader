@@ -1,0 +1,67 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://bm4dl3c55ph6g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfoa1"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="ImageTexture" id="ImageTexture_ikbg1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkfjd"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c5jb"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eh28n"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wy7ob"]
+bg_color = Color(0.211765, 0.211765, 0.211765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b7reg"]
+bg_color = Color(0.972549, 0.286275, 0.686275, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l40fq"]
+bg_color = Color(0.364706, 0.364706, 0.364706, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[resource]
+LineEdit/colors/font_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+LineEdit/colors/font_placeholder_color = Color(0.211765, 0.211765, 0.211765, 1)
+LineEdit/styles/focus = SubResource("StyleBoxFlat_vfoa1")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_vfoa1")
+OptionButton/colors/font_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+OptionButton/colors/font_pressed_color = Color(0.211765, 0.211765, 0.211765, 1)
+OptionButton/icons/arrow = SubResource("ImageTexture_ikbg1")
+OptionButton/styles/focus = SubResource("StyleBoxFlat_fkfjd")
+OptionButton/styles/hover = SubResource("StyleBoxFlat_4c5jb")
+OptionButton/styles/normal = SubResource("StyleBoxFlat_eh28n")
+Panel/styles/panel = SubResource("StyleBoxFlat_wy7ob")
+PanelBlack/base_type = &"Panel"
+PanelBlack/styles/panel = SubResource("StyleBoxFlat_b7reg")
+PanelGray/base_type = &"Panel"
+PanelGray/styles/panel = SubResource("StyleBoxFlat_l40fq")

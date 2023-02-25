@@ -32,6 +32,10 @@ window/subwindows/embed_subwindows=false
 
 enabled=PackedStringArray("res://addons/SmoothScroll/plugin.cfg", "res://addons/CursorShapePreviewer/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg")
 
+[gui]
+
+theme/custom="res://Theme.tres"
+
 [input]
 
 reload={
