@@ -16,3 +16,5 @@ exported/*
 data_*/
 AlbionLogReader.pck
 addons/SimpleTODO/*
+addons/Todo_Manager/*
+project.godot
