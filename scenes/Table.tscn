@@ -118,90 +118,112 @@ metadata/_edit_group_ = true
 [node name="TableItem" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem2" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem3" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem4" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem5" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem6" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem7" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem8" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem9" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem10" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem11" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem12" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem13" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem14" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem15" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem16" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem17" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem18" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem19" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem20" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem21" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem22" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("3_r1qcw")]
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="Panel" type="Panel" parent="PanelTable/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
