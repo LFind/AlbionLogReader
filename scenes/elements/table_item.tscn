@@ -9,21 +9,35 @@ script/source = "extends HBoxContainer
 @onready var button_name = %ButtonName
 @onready var button_count = %ButtonCount
 
-var entry:Dictionary
-var item:String
+var entries:Dictionary
+var item:String:
+	set(value):
+		item = value
+		update.emit()
+var count:int
+var last_change:Dictionary
+
+signal update
 
 func _ready():
 	button_name.pressed.connect(func():
 		Event.request_window_item_info.emit(item)
 		)
 	
+	update.connect(_update)
+	_update()
+
+func _update():
+	if item != \"\":
+		tooltip_text = item
+		button_name.text = item
+		button_count.text = str(count)
 
 func set_item(item:String):
 	self.item = item
-	self.entry = LogData.get_entries(item)
-	tooltip_text = item
-	button_name.text = item
-	button_count.text = str(LogData.get_item_count(item))
+	self.entries = LogData.get_entries(item)
+	self.count = LogData.get_item_count(item)
+	self.last_change = LogData.find_latest_date(self.entries, item)
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_araqp"]
