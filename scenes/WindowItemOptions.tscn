@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c53tdl0r0rl30"]
+
+[ext_resource type="Script" path="res://scenes/WindowItemOptions.gd" id="1_65mfn"]
+[ext_resource type="PackedScene" uid="uid://b2jlg8elxgfqu" path="res://scenes/item_options/ItemOptionsPane.tscn" id="2_p2t5u"]
+
+[node name="WindowItemOptions" type="Window"]
+initial_position = 2
+size = Vector2i(560, 560)
+transient = true
+exclusive = true
+unresizable = true
+min_size = Vector2i(400, 400)
+content_scale_size = Vector2i(560, 560)
+script = ExtResource("1_65mfn")
+
+[node name="ItemOptionsPane" parent="." instance=ExtResource("2_p2t5u")]

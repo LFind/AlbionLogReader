@@ -1,0 +1,621 @@
+[gd_scene load_steps=27 format=3 uid="uid://bisbl2w5xhocw"]
+
+[ext_resource type="Script" path="res://scenes/item_info/ItemInfoPane.gd" id="1_o4663"]
+[ext_resource type="Texture2D" uid="uid://bw8qcq103s6km" path="res://textures/refresh_32.png" id="2_ngwlt"]
+[ext_resource type="Texture2D" uid="uid://bff0es2n6vt41" path="res://icon.svg" id="2_nv3r0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_35lo4"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+corner_radius_top_left = 5
+anti_aliasing_size = 0.1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wsd45"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+corner_radius_top_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82y12"]
+corner_radius_top_right = 5
+anti_aliasing_size = 0.1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wdg0c"]
+bg_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_right = 5
+anti_aliasing_size = 0.1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dopo1"]
+bg_color = Color(0.211765, 0.211765, 0.211765, 1)
+corner_radius_top_right = 5
+anti_aliasing_size = 0.1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdbr3"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mor58"]
+bg_color = Color(0.339095, 0.339095, 0.339095, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bpj0w"]
+bg_color = Color(1, 1, 1, 0.156863)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jmk3p"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7tdr8"]
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6q6fh"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4pldy"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p7e1q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6rdj7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_und5g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4wlor"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jqfea"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5ljt"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.364706, 0.364706, 0.364706, 1)
+border_width_left = 2
+border_width_right = 2
+border_color = Color(0.494118, 0.494118, 0.494118, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t8wir"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_70ooo"]
+bg_color = Color(0.339095, 0.339095, 0.339095, 1)
+border_width_left = 2
+border_color = Color(0.492237, 0.492237, 0.492237, 1)
+border_blend = true
+
+[sub_resource type="Theme" id="Theme_yd0tj"]
+Button/styles/hover = SubResource("StyleBoxFlat_7tdr8")
+Button/styles/normal = SubResource("StyleBoxEmpty_6q6fh")
+Button/styles/pressed = SubResource("StyleBoxFlat_4pldy")
+CheckBox/styles/focus = SubResource("StyleBoxEmpty_p7e1q")
+CheckBox/styles/hover = SubResource("StyleBoxEmpty_6rdj7")
+CheckBox/styles/hover_pressed = SubResource("StyleBoxEmpty_und5g")
+CheckBox/styles/normal = SubResource("StyleBoxEmpty_4wlor")
+CheckBox/styles/pressed = SubResource("StyleBoxEmpty_jqfea")
+ItemList/colors/font_selected_color = Color(0.258824, 0.258824, 0.258824, 1)
+ItemList/styles/panel = SubResource("StyleBoxFlat_l5ljt")
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_t8wir")
+Panel/styles/panel = SubResource("StyleBoxFlat_70ooo")
+SplitContainer/constants/separation = 0
+SplitContainer/icons/h_grabber = ExtResource("2_nv3r0")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cqnq"]
+bg_color = Color(0.212305, 0.212305, 0.212305, 1)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_6jt5g"]
+
+[node name="ItemInfoPane" type="Panel"]
+custom_minimum_size = Vector2(560, 560)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 11
+mouse_filter = 1
+script = ExtResource("1_o4663")
+metadata/_edit_vertical_guides_ = [544.0, 1064.0, 160.0, 16.0, 1792.0]
+metadata/_edit_horizontal_guides_ = [320.0, 720.0, 16.0, 496.0, 544.0]
+
+[node name="TablePanel" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+
+[node name="VBoxLeft" type="VBoxContainer" parent="TablePanel"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/separation = 25
+metadata/_edit_group_ = true
+
+[node name="PlayerContainer" type="VBoxContainer" parent="TablePanel/VBoxLeft"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TablePanel/VBoxLeft/PlayerContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SearchField" type="LineEdit" parent="TablePanel/VBoxLeft/PlayerContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+theme_override_colors/font_placeholder_color = Color(0.212305, 0.212305, 0.212305, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_35lo4")
+theme_override_styles/focus = SubResource("StyleBoxFlat_wsd45")
+placeholder_text = "Игрок..."
+select_all_on_focus = true
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="ButtonClearPlayerSelect" type="Button" parent="TablePanel/VBoxLeft/PlayerContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+tooltip_text = "Сбросить выбор"
+focus_mode = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_82y12")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wdg0c")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dopo1")
+icon = ExtResource("2_ngwlt")
+expand_icon = true
+
+[node name="PlayerList" type="ItemList" parent="TablePanel/VBoxLeft/PlayerContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_pdbr3")
+theme_override_styles/selected = SubResource("StyleBoxFlat_mor58")
+theme_override_styles/cursor_unfocused = SubResource("StyleBoxFlat_bpj0w")
+item_count = 2
+item_0/text = "asdasd"
+item_1/text = "asdasd"
+
+[node name="PanelShowColumn" type="Panel" parent="TablePanel/VBoxLeft"]
+custom_minimum_size = Vector2(150, 230)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_jmk3p")
+
+[node name="ShowContainer" type="VBoxContainer" parent="TablePanel/VBoxLeft/PanelShowColumn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="TablePanel/VBoxLeft/PanelShowColumn/ShowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Показывать:"
+horizontal_alignment = 1
+
+[node name="CheckDate" type="CheckButton" parent="TablePanel/VBoxLeft/PanelShowColumn/ShowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+button_pressed = true
+text = "Дата"
+alignment = 2
+metadata/type = "date"
+
+[node name="CheckItem" type="CheckButton" parent="TablePanel/VBoxLeft/PanelShowColumn/ShowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+button_pressed = true
+text = "Предмет"
+alignment = 2
+metadata/type = "item"
+
+[node name="CheckPlayer" type="CheckButton" parent="TablePanel/VBoxLeft/PanelShowColumn/ShowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+button_pressed = true
+text = "Игрок"
+alignment = 2
+metadata/type = "player"
+
+[node name="CheckChar" type="CheckButton" parent="TablePanel/VBoxLeft/PanelShowColumn/ShowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+button_pressed = true
+text = "Чары"
+alignment = 2
+metadata/type = "char"
+
+[node name="CheckQuality" type="CheckButton" parent="TablePanel/VBoxLeft/PanelShowColumn/ShowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+button_pressed = true
+text = "Качество"
+alignment = 2
+metadata/type = "quality"
+
+[node name="CheckCount" type="CheckButton" parent="TablePanel/VBoxLeft/PanelShowColumn/ShowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+button_pressed = true
+text = "Количество"
+alignment = 2
+metadata/type = "countDelta"
+
+[node name="ButtonSettings" type="Button" parent="TablePanel/VBoxLeft"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "Настройки
+предмета"
+
+[node name="VBoxRight" type="VBoxContainer" parent="TablePanel"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+theme = SubResource("Theme_yd0tj")
+metadata/_edit_group_ = true
+
+[node name="Control" type="Control" parent="TablePanel/VBoxRight"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Table" type="Control" parent="TablePanel/VBoxRight"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+metadata/_edit_group_ = true
+
+[node name="PanelHeader" type="Panel" parent="TablePanel/VBoxRight/Table"]
+clip_contents = true
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 9
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_5cqnq")
+metadata/_edit_lock_ = true
+
+[node name="HeaderContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(2600, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2240.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+theme_override_constants/autohide = 0
+
+[node name="ButtonDate" type="Button" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+toggle_mode = true
+button_group = SubResource("ButtonGroup_6jt5g")
+text = "Дата"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/autohide = 0
+
+[node name="ButtonPlayer" type="Button" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+toggle_mode = true
+button_group = SubResource("ButtonGroup_6jt5g")
+text = "Игрок"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/autohide = 0
+
+[node name="ButtonItem" type="Button" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+toggle_mode = true
+button_group = SubResource("ButtonGroup_6jt5g")
+text = "Предмет"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/autohide = 0
+
+[node name="ButtonChar" type="Button" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+toggle_mode = true
+button_group = SubResource("ButtonGroup_6jt5g")
+text = "Чары"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/autohide = 0
+
+[node name="ButtonQuality" type="Button" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+toggle_mode = true
+button_group = SubResource("ButtonGroup_6jt5g")
+text = "Качество"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/autohide = 0
+
+[node name="ButtonCount" type="Button" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+toggle_mode = true
+button_group = SubResource("ButtonGroup_6jt5g")
+text = "Количество"
+
+[node name="Panel" type="Control" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 11
+mouse_filter = 1
+
+[node name="ScrollTable" type="ScrollContainer" parent="TablePanel/VBoxRight/Table"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="ItemListContainer" type="HBoxContainer" parent="TablePanel/VBoxRight/Table/ScrollTable"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 11
+theme_override_constants/separation = 0
+
+[node name="ItemDate" type="ItemList" parent="TablePanel/VBoxRight/Table/ScrollTable/ItemListContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(53, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 9
+focus_mode = 0
+mouse_filter = 1
+theme_override_constants/v_separation = 5
+auto_height = true
+item_count = 4
+same_column_width = true
+item_0/text = "02/15/2023 09:19:12"
+item_1/text = "02/15/2023 09:19:12"
+item_2/text = "02/15/2023 09:19:12"
+item_3/text = "02/15/2023 09:19:12"
+
+[node name="ItemPlayer" type="ItemList" parent="TablePanel/VBoxRight/Table/ScrollTable/ItemListContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 9
+focus_mode = 0
+mouse_filter = 1
+theme_override_constants/v_separation = 5
+auto_height = true
+item_count = 4
+same_column_width = true
+item_0/text = "Какое то длинное имя"
+item_1/text = "02/15/2023 09:19:12"
+item_2/text = "02/15/2023 09:19:12"
+item_3/text = "02/15/2023 09:19:12"
+
+[node name="ItemName" type="ItemList" parent="TablePanel/VBoxRight/Table/ScrollTable/ItemListContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(89, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 9
+focus_mode = 0
+mouse_filter = 1
+theme_override_constants/v_separation = 5
+auto_height = true
+item_count = 4
+same_column_width = true
+item_0/text = "02/15/2023 09:19:12"
+item_1/text = "02/15/2023 09:19:12"
+item_2/text = "02/15/2023 09:19:12"
+item_3/text = "02/15/2023 09:19:12"
+
+[node name="ItemChar" type="ItemList" parent="TablePanel/VBoxRight/Table/ScrollTable/ItemListContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(62, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 9
+focus_mode = 0
+mouse_filter = 1
+theme_override_constants/v_separation = 5
+auto_height = true
+item_count = 4
+same_column_width = true
+item_0/text = "02/15/2023 09:19:12"
+item_1/text = "02/15/2023 09:19:12"
+item_2/text = "02/15/2023 09:19:12"
+item_3/text = "02/15/2023 09:19:12"
+
+[node name="ItemQuality" type="ItemList" parent="TablePanel/VBoxRight/Table/ScrollTable/ItemListContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(93, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 9
+focus_mode = 0
+mouse_filter = 1
+theme_override_constants/v_separation = 5
+auto_height = true
+item_count = 4
+same_column_width = true
+item_0/text = "02/15/2023 09:19:12"
+item_1/text = "02/15/2023 09:19:12"
+item_2/text = "02/15/2023 09:19:12"
+item_3/text = "02/15/2023 09:19:12"
+
+[node name="ItemCount" type="ItemList" parent="TablePanel/VBoxRight/Table/ScrollTable/ItemListContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(114, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 9
+focus_mode = 0
+mouse_filter = 1
+theme_override_constants/v_separation = 5
+auto_height = true
+item_count = 4
+same_column_width = true
+item_0/text = "02/15/2023 09:19:12"
+item_1/text = "02/15/2023 09:19:12"
+item_2/text = "02/15/2023 09:19:12"
+item_3/text = "02/15/2023 09:19:12"
+
+[node name="Panel" type="Panel" parent="TablePanel/VBoxRight/Table/ScrollTable/ItemListContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+
+[node name="FilterDate" type="HFlowContainer" parent="TablePanel/VBoxRight"]
+clip_contents = true
+layout_mode = 2
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 10
+metadata/_edit_group_ = true
+
+[node name="DateBegin" type="HBoxContainer" parent="TablePanel/VBoxRight/FilterDate"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+
+[node name="CheckBoxDateBegin" type="CheckBox" parent="TablePanel/VBoxRight/FilterDate/DateBegin"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "Начало:"
+
+[node name="SpinBoxBeginDD" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateBegin"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 1
+max_value = 31.0
+alignment = 1
+
+[node name="SpinBoxBeginMM" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateBegin"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+max_value = 12.0
+alignment = 1
+
+[node name="SpinBoxBeginYY" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateBegin"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+min_value = 2000.0
+max_value = 2222.0
+value = 2020.0
+alignment = 1
+
+[node name="DateEnd" type="HBoxContainer" parent="TablePanel/VBoxRight/FilterDate"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+
+[node name="CheckBoxDateEnd" type="CheckBox" parent="TablePanel/VBoxRight/FilterDate/DateEnd"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "Конец:"
+
+[node name="SpinBoxEndDD" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateEnd"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 1
+max_value = 31.0
+alignment = 1
+
+[node name="SpinBoxEndMM" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateEnd"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+max_value = 12.0
+alignment = 1
+
+[node name="SpinBoxEndYY" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateEnd"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+min_value = 2000.0
+max_value = 2222.0
+value = 2020.0
+alignment = 1

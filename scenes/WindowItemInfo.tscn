@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://drg0vegnjjhog"]
+
+[ext_resource type="Script" path="res://scenes/WindowItemInfo.gd" id="1_pgndo"]
+[ext_resource type="PackedScene" uid="uid://c53tdl0r0rl30" path="res://scenes/WindowItemOptions.tscn" id="2_lcwfs"]
+[ext_resource type="PackedScene" uid="uid://bisbl2w5xhocw" path="res://scenes/item_info/ItemInfoPane.tscn" id="2_wk75k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vcr3g"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="WindowItemInfo" type="Window"]
+gui_embed_subwindows = true
+initial_position = 2
+size = Vector2i(600, 624)
+visible = false
+transient = true
+min_size = Vector2i(600, 624)
+content_scale_size = Vector2i(560, 560)
+script = ExtResource("1_pgndo")
+
+[node name="WindowItemOptions" parent="." instance=ExtResource("2_lcwfs")]
+initial_position = 0
+position = Vector2i(50, 50)
+visible = false
+exclusive = false
+
+[node name="ItemInfoPane" parent="." instance=ExtResource("2_wk75k")]
+
+[node name="PanelBackground" type="Panel" parent="ItemInfoPane"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vcr3g")

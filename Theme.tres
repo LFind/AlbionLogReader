@@ -1,0 +1,112 @@
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://bm4dl3c55ph6g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5nj4p"]
+bg_color = Color(0.623529, 0.254902, 0.25098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+anti_aliasing_size = 0.1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fjnj"]
+bg_color = Color(0.368627, 0.133333, 0.133333, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+anti_aliasing_size = 0.1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wwi6b"]
+bg_color = Color(0.880582, 0.483425, 0.466988, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+anti_aliasing_size = 0.1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfoa1"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="ImageTexture" id="ImageTexture_ikbg1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkfjd"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c5jb"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eh28n"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wy7ob"]
+bg_color = Color(0.211765, 0.211765, 0.211765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cj5g"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61ybm"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l40fq"]
+bg_color = Color(0.364706, 0.364706, 0.364706, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jo3n4"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
+border_color = Color(0.996078, 0.701961, 0.811765, 1)
+expand_margin_left = 8.0
+expand_margin_top = 32.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+shadow_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+shadow_size = 25
+anti_aliasing_size = 0.1
+
+[resource]
+ButtonRed/base_type = &"Button"
+ButtonRed/styles/hover = SubResource("StyleBoxFlat_5nj4p")
+ButtonRed/styles/normal = SubResource("StyleBoxFlat_3fjnj")
+ButtonRed/styles/pressed = SubResource("StyleBoxFlat_wwi6b")
+LineEdit/colors/font_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+LineEdit/colors/font_placeholder_color = Color(0.211765, 0.211765, 0.211765, 1)
+LineEdit/styles/focus = SubResource("StyleBoxFlat_vfoa1")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_vfoa1")
+OptionButton/colors/font_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+OptionButton/colors/font_pressed_color = Color(0.211765, 0.211765, 0.211765, 1)
+OptionButton/icons/arrow = SubResource("ImageTexture_ikbg1")
+OptionButton/styles/focus = SubResource("StyleBoxFlat_fkfjd")
+OptionButton/styles/hover = SubResource("StyleBoxFlat_4c5jb")
+OptionButton/styles/normal = SubResource("StyleBoxFlat_eh28n")
+Panel/styles/panel = SubResource("StyleBoxFlat_wy7ob")
+PanelDark/base_type = &"Panel"
+PanelDark/styles/panel = SubResource("StyleBoxFlat_0cj5g")
+PanelDarkGray/base_type = &"Panel"
+PanelDarkGray/styles/panel = SubResource("StyleBoxFlat_61ybm")
+PanelGray/base_type = &"Panel"
+PanelGray/styles/panel = SubResource("StyleBoxFlat_l40fq")
+Window/styles/embedded_border = SubResource("StyleBoxFlat_jo3n4")
