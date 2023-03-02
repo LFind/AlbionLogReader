@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="AlbionLogReader"
-run/main_scene="res://scenes/Table.tscn"
+run/main_scene="res://scenes/items_table/Table.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 boot_splash/show_image=false
 config/icon="res://icon.svg"
@@ -21,6 +21,8 @@ config/icon="res://icon.svg"
 ItemData="*res://ItemData.gd"
 LogData="*res://LogData.gd"
 Event="*res://Event.gd"
+WindowItemInfo="*res://scenes/WindowItemInfo.tscn"
+Settigs="*res://Settigs.gd"
 
 [display]
 
@@ -31,7 +33,7 @@ window/subwindows/embed_subwindows=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/SmoothScroll/plugin.cfg", "res://addons/CursorShapePreviewer/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/SmoothScroll/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg")
 
 [gui]
 

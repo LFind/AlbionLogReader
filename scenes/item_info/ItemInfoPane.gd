@@ -11,6 +11,12 @@ extends Panel
 				
 				button.resized.emit()
 
+@onready var search_field_player = %SearchField
+@onready var player_list = %PlayerList
+@onready var button_clear_player_select = $TablePanel/VBoxLeft/PlayerContainer/HBoxContainer/ButtonClearPlayerSelect
+
+@onready var button_settings = $TablePanel/VBoxLeft/ButtonSettings
+
 @onready var check_box_date_begin = %CheckBoxDateBegin
 @onready var check_box_date_end = %CheckBoxDateEnd
 
@@ -28,7 +34,6 @@ extends Panel
 @onready var check_count = %CheckCount
 @onready var check_player = %CheckPlayer
 
-@onready var player_list = %PlayerList
 @onready var item_list_container = %ItemListContainer
 @onready var header_container = %HeaderContainer
 @onready var table = %Table
@@ -60,8 +65,11 @@ extends Panel
 		}
 }
 
+var players:Array[String]
+var players_selected:Array[String]
+var item:String
 var is_ready:bool
-
+var count:int
 var data:Dictionary:
 	set(value):
 		data = value
@@ -84,7 +92,8 @@ var data:Dictionary:
 			spin_box_end_dd.get_line_edit().text = str(date_max["day"])
 			spin_box_end_mm.get_line_edit().text = str(date_max["month"])
 			spin_box_end_yy.get_line_edit().text = str(date_max["year"])
-			
+		
+		players = LogData.get_unique_players(data)
 		_update_table()
 
 
@@ -138,59 +147,18 @@ func _ready():
 			_update_table()
 			)
 	
-
-
-
-func _process(delta):
-	header_container.position.x = item_list_container.position.x
-
-
-func _update_table():
-	player_list.clear()
-	for player in LogData.get_unique_players(data):
-		player_list.add_item(player)
+	player_list.item_selected.connect(func(index:int):
+		players_selected.clear()
+		# FIXME Множественный выбор игроков
+		for i in player_list.get_selected_items():
+			players_selected.append(player_list.get_item_text(i))
+		_update_table()
+		)
 	
-	for column in columns.values():
-		column["items"].clear()
+	search_field_player.text_changed.connect(func(text:String):_update_players())
+	button_settings.pressed.connect(_request_window_item_options)
 	
-	
-	
-	for date in data.keys():
-		var valid_end:bool = true
-		
-		var valid_begin:bool = true
-		if check_box_date_begin.button_pressed:
-			valid_begin = LogData.compare_datetime(date,{
-				"year": spin_box_begin_yy.value,
-				"month": spin_box_begin_mm.value,
-				"day": spin_box_begin_dd.value,
-				"hour": 0,
-				"minute": 0,
-				"second": 0
-			})
-			
-		
-		if check_box_date_end.button_pressed:
-			valid_end = LogData.compare_datetime({
-				"year": spin_box_end_yy.value,
-				"month": spin_box_end_mm.value,
-				"day": spin_box_end_dd.value,
-				"hour": 0,
-				"minute": 0,
-				"second": 0
-			},date)
-		
-		if not (valid_begin and valid_end): continue
-		
-		for entry in data[date]:
-			columns["date"]["items"].add_item(date)
-			columns["player"]["items"].add_item(entry["player"])
-			columns["char"]["items"].add_item(str(entry["char"]))
-			columns["item"]["items"].add_item(entry["item"])
-			columns["quality"]["items"].add_item(str(entry["quality"]))
-			columns["countDelta"]["items"].add_item(str(entry["countDelta"]))
-	
-	# Изменение внутренних нод в спинбоксах
+	# Изменение визуала внутренних нод в спинбоксах
 	for spin_box in [spin_box_begin_dd,spin_box_begin_mm,spin_box_begin_yy,spin_box_end_dd,spin_box_end_mm,spin_box_end_yy]:
 		var spin_textedit:LineEdit
 		for node in spin_box.get_children(true):
@@ -199,16 +167,99 @@ func _update_table():
 		spin_textedit.alignment = HORIZONTAL_ALIGNMENT_CENTER
 		spin_textedit.size.x = 20
 	
+	button_clear_player_select.pressed.connect(func():
+		players_selected.clear()
+		player_list.deselect_all()
+		_update_table()
+		)
 
+func _process(delta):
+	header_container.position.x = item_list_container.position.x
 
+func _update_players():
+	var search_player:String = search_field_player.get_text().strip_edges().to_lower()
+	
+	player_list.clear()
+	for player in players:
+		if search_player != "" and not search_player in player.strip_edges().to_lower():
+			continue
+		player_list.add_item(player)
+	
+	for i in range(player_list.get_item_count()):
+		if player_list.get_item_text(i) in players_selected:
+			player_list.select(i,false)
+	
+	player_list.sort_items_by_text()
+
+func _update_table():
+	_update_players()
+	var data_filtred = data.duplicate(true)
+	count = 0
+	
+	# Очистка каждого столбца
+	for column in columns.values():
+		column["items"].clear()
+	
+	for date in data_filtred.keys():
+		var valid_end:bool = true
+		var valid_begin:bool = true
+		var valid_player:bool = true
+		
+		# Проверка на соответствие фильтра начальной даты
+		if check_box_date_begin.button_pressed:
+			if LogData.compare_datetime(date,{
+				"year": spin_box_begin_yy.value,
+				"month": spin_box_begin_mm.value,
+				"day": spin_box_begin_dd.value,
+				"hour": 0,
+				"minute": 0,
+				"second": 0
+			}): continue
+		
+		# Проверка на соответствие фильтра конечной даты
+		if check_box_date_end.button_pressed:
+			if LogData.compare_datetime({
+				"year": spin_box_end_yy.value,
+				"month": spin_box_end_mm.value,
+				"day": spin_box_end_dd.value,
+				"hour": 0,
+				"minute": 0,
+				"second": 0
+			},date): continue
+		
+		# Фильтрация по данным записи
+		data_filtred[date] = data_filtred[date].filter(func(entry:Dictionary):
+			# По игроку
+			if players_selected.size() > 0:
+				if not entry["player"] in players_selected:
+					return false
+			return true
+			)
+		
+		# Выставление данных логов
+		for entry in data_filtred[date]:
+			columns["date"]["items"].add_item(date)
+			columns["player"]["items"].add_item(entry["player"])
+			columns["char"]["items"].add_item(str(entry["char"]))
+			columns["item"]["items"].add_item(entry["item"])
+			columns["quality"]["items"].add_item(str(entry["quality"]))
+			count += entry["countDelta"]
+			columns["countDelta"]["items"].add_item(str(entry["countDelta"]))
+	
+
+func _request_window_item_options():
+	Event.request_window_item_options.emit(item)
+
+func _release_focus():
+	var focused_node:Control = get_window().gui_get_focus_owner()
+	if focused_node:
+		search_field_player.release_focus()
 
 func _unhandled_input(event):
 	if event.is_action("ui_mouse_left"):
-		var focused_node:Control = get_window().gui_get_focus_owner()
-		if focused_node:
-			focused_node.release_focus()
+		_release_focus()
 
-
-func set_item(item_name:String):
-	self.data = LogData.get_entries(item_name)
+func set_item(item:String):
+	self.data = LogData.get_entries(item)
+	self.item = item
 

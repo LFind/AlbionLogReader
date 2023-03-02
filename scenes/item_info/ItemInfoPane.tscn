@@ -1,24 +1,38 @@
-[gd_scene load_steps=23 format=3 uid="uid://b4wyjdmuir1vo"]
+[gd_scene load_steps=27 format=3 uid="uid://bisbl2w5xhocw"]
 
-[ext_resource type="Script" path="res://scenes/ItemInfoPane.gd" id="1_a70t8"]
-[ext_resource type="Texture2D" uid="uid://bff0es2n6vt41" path="res://icon.svg" id="2_vhx57"]
+[ext_resource type="Script" path="res://scenes/item_info/ItemInfoPane.gd" id="1_o4663"]
+[ext_resource type="Texture2D" uid="uid://bw8qcq103s6km" path="res://textures/refresh_32.png" id="2_ngwlt"]
+[ext_resource type="Texture2D" uid="uid://bff0es2n6vt41" path="res://icon.svg" id="2_nv3r0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_35lo4"]
 content_margin_left = 5.0
 content_margin_right = 5.0
 corner_radius_top_left = 5
-corner_radius_top_right = 5
+anti_aliasing_size = 0.1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wsd45"]
 content_margin_left = 5.0
 content_margin_right = 5.0
 corner_radius_top_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82y12"]
 corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+anti_aliasing_size = 0.1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wdg0c"]
+bg_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_right = 5
+anti_aliasing_size = 0.1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dopo1"]
+bg_color = Color(0.211765, 0.211765, 0.211765, 1)
+corner_radius_top_right = 5
+anti_aliasing_size = 0.1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdbr3"]
-bg_color = Color(0.235294, 0.235294, 0.235294, 1)
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
@@ -28,8 +42,8 @@ bg_color = Color(0.339095, 0.339095, 0.339095, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bpj0w"]
 bg_color = Color(1, 1, 1, 0.156863)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o51yy"]
-bg_color = Color(0.211765, 0.211765, 0.211765, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jmk3p"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
@@ -89,12 +103,12 @@ ItemList/styles/panel = SubResource("StyleBoxFlat_l5ljt")
 LineEdit/styles/focus = SubResource("StyleBoxEmpty_t8wir")
 Panel/styles/panel = SubResource("StyleBoxFlat_70ooo")
 SplitContainer/constants/separation = 0
-SplitContainer/icons/h_grabber = ExtResource("2_vhx57")
+SplitContainer/icons/h_grabber = ExtResource("2_nv3r0")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cqnq"]
 bg_color = Color(0.212305, 0.212305, 0.212305, 1)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_fr8vr"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_6jt5g"]
 
 [node name="ItemInfoPane" type="Panel"]
 custom_minimum_size = Vector2(560, 560)
@@ -105,11 +119,12 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 11
-script = ExtResource("1_a70t8")
+mouse_filter = 1
+script = ExtResource("1_o4663")
 metadata/_edit_vertical_guides_ = [544.0, 1064.0, 160.0, 16.0, 1792.0]
 metadata/_edit_horizontal_guides_ = [320.0, 720.0, 16.0, 496.0, 544.0]
 
-[node name="HSplitContainer" type="HSplitContainer" parent="."]
+[node name="TablePanel" type="HSplitContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -119,20 +134,26 @@ offset_top = 16.0
 offset_right = -16.0
 offset_bottom = -16.0
 
-[node name="VBoxLeft" type="VBoxContainer" parent="HSplitContainer"]
+[node name="VBoxLeft" type="VBoxContainer" parent="TablePanel"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_constants/separation = 25
 metadata/_edit_group_ = true
 
-[node name="PlayerContainer" type="VBoxContainer" parent="HSplitContainer/VBoxLeft"]
+[node name="PlayerContainer" type="VBoxContainer" parent="TablePanel/VBoxLeft"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="SearchField" type="LineEdit" parent="HSplitContainer/VBoxLeft/PlayerContainer"]
-unique_name_in_owner = true
+[node name="HBoxContainer" type="HBoxContainer" parent="TablePanel/VBoxLeft/PlayerContainer"]
 layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SearchField" type="LineEdit" parent="TablePanel/VBoxLeft/PlayerContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
 theme_override_colors/font_placeholder_color = Color(0.212305, 0.212305, 0.212305, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_35lo4")
@@ -142,26 +163,40 @@ select_all_on_focus = true
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="PlayerList" type="ItemList" parent="HSplitContainer/VBoxLeft/PlayerContainer"]
+[node name="ButtonClearPlayerSelect" type="Button" parent="TablePanel/VBoxLeft/PlayerContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+tooltip_text = "Сбросить выбор"
+focus_mode = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_82y12")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wdg0c")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dopo1")
+icon = ExtResource("2_ngwlt")
+expand_icon = true
+
+[node name="PlayerList" type="ItemList" parent="TablePanel/VBoxLeft/PlayerContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_pdbr3")
 theme_override_styles/selected = SubResource("StyleBoxFlat_mor58")
 theme_override_styles/cursor_unfocused = SubResource("StyleBoxFlat_bpj0w")
-select_mode = 1
 item_count = 2
 item_0/text = "asdasd"
 item_1/text = "asdasd"
 
-[node name="PanelShowColumn" type="Panel" parent="HSplitContainer/VBoxLeft"]
+[node name="PanelShowColumn" type="Panel" parent="TablePanel/VBoxLeft"]
 custom_minimum_size = Vector2(150, 230)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_o51yy")
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_jmk3p")
 
-[node name="ShowContainer" type="VBoxContainer" parent="HSplitContainer/VBoxLeft/PanelShowColumn"]
+[node name="ShowContainer" type="VBoxContainer" parent="TablePanel/VBoxLeft/PanelShowColumn"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -172,92 +207,102 @@ theme_override_constants/separation = 0
 alignment = 1
 metadata/_edit_group_ = true
 
-[node name="Label" type="Label" parent="HSplitContainer/VBoxLeft/PanelShowColumn/ShowContainer"]
+[node name="Label" type="Label" parent="TablePanel/VBoxLeft/PanelShowColumn/ShowContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
 text = "Показывать:"
 horizontal_alignment = 1
 
-[node name="CheckDate" type="CheckButton" parent="HSplitContainer/VBoxLeft/PanelShowColumn/ShowContainer"]
+[node name="CheckDate" type="CheckButton" parent="TablePanel/VBoxLeft/PanelShowColumn/ShowContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
+mouse_filter = 1
 button_pressed = true
 text = "Дата"
 alignment = 2
 metadata/type = "date"
 
-[node name="CheckItem" type="CheckButton" parent="HSplitContainer/VBoxLeft/PanelShowColumn/ShowContainer"]
+[node name="CheckItem" type="CheckButton" parent="TablePanel/VBoxLeft/PanelShowColumn/ShowContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
+mouse_filter = 1
 button_pressed = true
 text = "Предмет"
 alignment = 2
 metadata/type = "item"
 
-[node name="CheckPlayer" type="CheckButton" parent="HSplitContainer/VBoxLeft/PanelShowColumn/ShowContainer"]
+[node name="CheckPlayer" type="CheckButton" parent="TablePanel/VBoxLeft/PanelShowColumn/ShowContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
+mouse_filter = 1
 button_pressed = true
 text = "Игрок"
 alignment = 2
 metadata/type = "player"
 
-[node name="CheckChar" type="CheckButton" parent="HSplitContainer/VBoxLeft/PanelShowColumn/ShowContainer"]
+[node name="CheckChar" type="CheckButton" parent="TablePanel/VBoxLeft/PanelShowColumn/ShowContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
+mouse_filter = 1
 button_pressed = true
 text = "Чары"
 alignment = 2
 metadata/type = "char"
 
-[node name="CheckQuality" type="CheckButton" parent="HSplitContainer/VBoxLeft/PanelShowColumn/ShowContainer"]
+[node name="CheckQuality" type="CheckButton" parent="TablePanel/VBoxLeft/PanelShowColumn/ShowContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
+mouse_filter = 1
 button_pressed = true
 text = "Качество"
 alignment = 2
 metadata/type = "quality"
 
-[node name="CheckCount" type="CheckButton" parent="HSplitContainer/VBoxLeft/PanelShowColumn/ShowContainer"]
+[node name="CheckCount" type="CheckButton" parent="TablePanel/VBoxLeft/PanelShowColumn/ShowContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
+mouse_filter = 1
 button_pressed = true
 text = "Количество"
 alignment = 2
 metadata/type = "countDelta"
 
-[node name="ButtonSettings" type="Button" parent="HSplitContainer/VBoxLeft"]
+[node name="ButtonSettings" type="Button" parent="TablePanel/VBoxLeft"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 focus_mode = 0
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "Настройки
 предмета"
 
-[node name="VBoxRight" type="VBoxContainer" parent="HSplitContainer"]
+[node name="VBoxRight" type="VBoxContainer" parent="TablePanel"]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 theme = SubResource("Theme_yd0tj")
 metadata/_edit_group_ = true
 
-[node name="Control" type="Control" parent="HSplitContainer/VBoxRight"]
+[node name="Control" type="Control" parent="TablePanel/VBoxRight"]
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
+mouse_filter = 1
 
-[node name="Table" type="Control" parent="HSplitContainer/VBoxRight"]
+[node name="Table" type="Control" parent="TablePanel/VBoxRight"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 1
 metadata/_edit_group_ = true
 
-[node name="PanelHeader" type="Panel" parent="HSplitContainer/VBoxRight/Table"]
+[node name="PanelHeader" type="Panel" parent="TablePanel/VBoxRight/Table"]
 clip_contents = true
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 1
@@ -272,7 +317,7 @@ mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_5cqnq")
 metadata/_edit_lock_ = true
 
-[node name="HeaderContainer" type="HSplitContainer" parent="HSplitContainer/VBoxRight/Table/PanelHeader"]
+[node name="HeaderContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(2600, 0)
 layout_mode = 1
@@ -284,84 +329,91 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 0
 theme_override_constants/autohide = 0
 
-[node name="ButtonDate" type="Button" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer"]
+[node name="ButtonDate" type="Button" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
+mouse_filter = 1
 toggle_mode = true
-button_group = SubResource("ButtonGroup_fr8vr")
+button_group = SubResource("ButtonGroup_6jt5g")
 text = "Дата"
 
-[node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/autohide = 0
 
-[node name="ButtonPlayer" type="Button" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer"]
+[node name="ButtonPlayer" type="Button" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
+mouse_filter = 1
 toggle_mode = true
-button_group = SubResource("ButtonGroup_fr8vr")
+button_group = SubResource("ButtonGroup_6jt5g")
 text = "Игрок"
 
-[node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/autohide = 0
 
-[node name="ButtonItem" type="Button" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer"]
+[node name="ButtonItem" type="Button" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
+mouse_filter = 1
 toggle_mode = true
-button_group = SubResource("ButtonGroup_fr8vr")
+button_group = SubResource("ButtonGroup_6jt5g")
 text = "Предмет"
 
-[node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/autohide = 0
 
-[node name="ButtonChar" type="Button" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
+[node name="ButtonChar" type="Button" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
+mouse_filter = 1
 toggle_mode = true
-button_group = SubResource("ButtonGroup_fr8vr")
+button_group = SubResource("ButtonGroup_6jt5g")
 text = "Чары"
 
-[node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/autohide = 0
 
-[node name="ButtonQuality" type="Button" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
+[node name="ButtonQuality" type="Button" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
+mouse_filter = 1
 toggle_mode = true
-button_group = SubResource("ButtonGroup_fr8vr")
+button_group = SubResource("ButtonGroup_6jt5g")
 text = "Качество"
 
-[node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/autohide = 0
 
-[node name="ButtonCount" type="Button" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
+[node name="ButtonCount" type="Button" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
+mouse_filter = 1
 toggle_mode = true
-button_group = SubResource("ButtonGroup_fr8vr")
+button_group = SubResource("ButtonGroup_6jt5g")
 text = "Количество"
 
-[node name="Panel" type="Control" parent="HSplitContainer/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
+[node name="Panel" type="Control" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 11
+mouse_filter = 1
 
-[node name="ScrollTable" type="ScrollContainer" parent="HSplitContainer/VBoxRight/Table"]
+[node name="ScrollTable" type="ScrollContainer" parent="TablePanel/VBoxRight/Table"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -373,20 +425,21 @@ size_flags_vertical = 3
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="ItemListContainer" type="HBoxContainer" parent="HSplitContainer/VBoxRight/Table/ScrollTable"]
+[node name="ItemListContainer" type="HBoxContainer" parent="TablePanel/VBoxRight/Table/ScrollTable"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 11
 theme_override_constants/separation = 0
 
-[node name="ItemDate" type="ItemList" parent="HSplitContainer/VBoxRight/Table/ScrollTable/ItemListContainer"]
+[node name="ItemDate" type="ItemList" parent="TablePanel/VBoxRight/Table/ScrollTable/ItemListContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(53, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 9
 focus_mode = 0
+mouse_filter = 1
 theme_override_constants/v_separation = 5
 auto_height = true
 item_count = 4
@@ -396,13 +449,14 @@ item_1/text = "02/15/2023 09:19:12"
 item_2/text = "02/15/2023 09:19:12"
 item_3/text = "02/15/2023 09:19:12"
 
-[node name="ItemPlayer" type="ItemList" parent="HSplitContainer/VBoxRight/Table/ScrollTable/ItemListContainer"]
+[node name="ItemPlayer" type="ItemList" parent="TablePanel/VBoxRight/Table/ScrollTable/ItemListContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(67, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 9
 focus_mode = 0
+mouse_filter = 1
 theme_override_constants/v_separation = 5
 auto_height = true
 item_count = 4
@@ -412,13 +466,14 @@ item_1/text = "02/15/2023 09:19:12"
 item_2/text = "02/15/2023 09:19:12"
 item_3/text = "02/15/2023 09:19:12"
 
-[node name="ItemName" type="ItemList" parent="HSplitContainer/VBoxRight/Table/ScrollTable/ItemListContainer"]
+[node name="ItemName" type="ItemList" parent="TablePanel/VBoxRight/Table/ScrollTable/ItemListContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(89, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 9
 focus_mode = 0
+mouse_filter = 1
 theme_override_constants/v_separation = 5
 auto_height = true
 item_count = 4
@@ -428,13 +483,14 @@ item_1/text = "02/15/2023 09:19:12"
 item_2/text = "02/15/2023 09:19:12"
 item_3/text = "02/15/2023 09:19:12"
 
-[node name="ItemChar" type="ItemList" parent="HSplitContainer/VBoxRight/Table/ScrollTable/ItemListContainer"]
+[node name="ItemChar" type="ItemList" parent="TablePanel/VBoxRight/Table/ScrollTable/ItemListContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(62, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 9
 focus_mode = 0
+mouse_filter = 1
 theme_override_constants/v_separation = 5
 auto_height = true
 item_count = 4
@@ -444,13 +500,14 @@ item_1/text = "02/15/2023 09:19:12"
 item_2/text = "02/15/2023 09:19:12"
 item_3/text = "02/15/2023 09:19:12"
 
-[node name="ItemQuality" type="ItemList" parent="HSplitContainer/VBoxRight/Table/ScrollTable/ItemListContainer"]
+[node name="ItemQuality" type="ItemList" parent="TablePanel/VBoxRight/Table/ScrollTable/ItemListContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(93, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 9
 focus_mode = 0
+mouse_filter = 1
 theme_override_constants/v_separation = 5
 auto_height = true
 item_count = 4
@@ -460,13 +517,14 @@ item_1/text = "02/15/2023 09:19:12"
 item_2/text = "02/15/2023 09:19:12"
 item_3/text = "02/15/2023 09:19:12"
 
-[node name="ItemCount" type="ItemList" parent="HSplitContainer/VBoxRight/Table/ScrollTable/ItemListContainer"]
+[node name="ItemCount" type="ItemList" parent="TablePanel/VBoxRight/Table/ScrollTable/ItemListContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(114, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 9
 focus_mode = 0
+mouse_filter = 1
 theme_override_constants/v_separation = 5
 auto_height = true
 item_count = 4
@@ -476,73 +534,88 @@ item_1/text = "02/15/2023 09:19:12"
 item_2/text = "02/15/2023 09:19:12"
 item_3/text = "02/15/2023 09:19:12"
 
-[node name="Panel" type="Panel" parent="HSplitContainer/VBoxRight/Table/ScrollTable/ItemListContainer"]
+[node name="Panel" type="Panel" parent="TablePanel/VBoxRight/Table/ScrollTable/ItemListContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
 
-[node name="FilterDate" type="HFlowContainer" parent="HSplitContainer/VBoxRight"]
+[node name="FilterDate" type="HFlowContainer" parent="TablePanel/VBoxRight"]
 clip_contents = true
 layout_mode = 2
 theme_override_constants/h_separation = 50
 theme_override_constants/v_separation = 10
 metadata/_edit_group_ = true
 
-[node name="DateBegin" type="HBoxContainer" parent="HSplitContainer/VBoxRight/FilterDate"]
+[node name="DateBegin" type="HBoxContainer" parent="TablePanel/VBoxRight/FilterDate"]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 
-[node name="CheckBoxDateBegin" type="CheckBox" parent="HSplitContainer/VBoxRight/FilterDate/DateBegin"]
+[node name="CheckBoxDateBegin" type="CheckBox" parent="TablePanel/VBoxRight/FilterDate/DateBegin"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "Начало:"
 
-[node name="SpinBoxBeginDD" type="SpinBox" parent="HSplitContainer/VBoxRight/FilterDate/DateBegin"]
+[node name="SpinBoxBeginDD" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateBegin"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 max_value = 31.0
+alignment = 1
 
-[node name="SpinBoxBeginMM" type="SpinBox" parent="HSplitContainer/VBoxRight/FilterDate/DateBegin"]
+[node name="SpinBoxBeginMM" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateBegin"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 1
 max_value = 12.0
+alignment = 1
 
-[node name="SpinBoxBeginYY" type="SpinBox" parent="HSplitContainer/VBoxRight/FilterDate/DateBegin"]
+[node name="SpinBoxBeginYY" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateBegin"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 1
 min_value = 2000.0
 max_value = 2222.0
 value = 2020.0
+alignment = 1
 
-[node name="DateEnd" type="HBoxContainer" parent="HSplitContainer/VBoxRight/FilterDate"]
+[node name="DateEnd" type="HBoxContainer" parent="TablePanel/VBoxRight/FilterDate"]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 
-[node name="CheckBoxDateEnd" type="CheckBox" parent="HSplitContainer/VBoxRight/FilterDate/DateEnd"]
+[node name="CheckBoxDateEnd" type="CheckBox" parent="TablePanel/VBoxRight/FilterDate/DateEnd"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "Конец:"
 
-[node name="SpinBoxEndDD" type="SpinBox" parent="HSplitContainer/VBoxRight/FilterDate/DateEnd"]
+[node name="SpinBoxEndDD" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateEnd"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 max_value = 31.0
+alignment = 1
 
-[node name="SpinBoxEndMM" type="SpinBox" parent="HSplitContainer/VBoxRight/FilterDate/DateEnd"]
+[node name="SpinBoxEndMM" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateEnd"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 1
 max_value = 12.0
+alignment = 1
 
-[node name="SpinBoxEndYY" type="SpinBox" parent="HSplitContainer/VBoxRight/FilterDate/DateEnd"]
+[node name="SpinBoxEndYY" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateEnd"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 1
 min_value = 2000.0
 max_value = 2222.0
 value = 2020.0
+alignment = 1

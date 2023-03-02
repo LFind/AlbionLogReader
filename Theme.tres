@@ -1,4 +1,28 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://bm4dl3c55ph6g"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://bm4dl3c55ph6g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5nj4p"]
+bg_color = Color(0.623529, 0.254902, 0.25098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+anti_aliasing_size = 0.1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fjnj"]
+bg_color = Color(0.368627, 0.133333, 0.133333, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+anti_aliasing_size = 0.1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wwi6b"]
+bg_color = Color(0.880582, 0.483425, 0.466988, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+anti_aliasing_size = 0.1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfoa1"]
 content_margin_left = 5.0
@@ -39,8 +63,11 @@ corner_radius_bottom_left = 5
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wy7ob"]
 bg_color = Color(0.211765, 0.211765, 0.211765, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b7reg"]
-bg_color = Color(0.972549, 0.286275, 0.686275, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cj5g"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61ybm"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l40fq"]
 bg_color = Color(0.364706, 0.364706, 0.364706, 1)
@@ -50,6 +77,10 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
 [resource]
+ButtonRed/base_type = &"Button"
+ButtonRed/styles/hover = SubResource("StyleBoxFlat_5nj4p")
+ButtonRed/styles/normal = SubResource("StyleBoxFlat_3fjnj")
+ButtonRed/styles/pressed = SubResource("StyleBoxFlat_wwi6b")
 LineEdit/colors/font_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
 LineEdit/colors/font_placeholder_color = Color(0.211765, 0.211765, 0.211765, 1)
 LineEdit/styles/focus = SubResource("StyleBoxFlat_vfoa1")
@@ -61,7 +92,9 @@ OptionButton/styles/focus = SubResource("StyleBoxFlat_fkfjd")
 OptionButton/styles/hover = SubResource("StyleBoxFlat_4c5jb")
 OptionButton/styles/normal = SubResource("StyleBoxFlat_eh28n")
 Panel/styles/panel = SubResource("StyleBoxFlat_wy7ob")
-PanelBlack/base_type = &"Panel"
-PanelBlack/styles/panel = SubResource("StyleBoxFlat_b7reg")
+PanelDark/base_type = &"Panel"
+PanelDark/styles/panel = SubResource("StyleBoxFlat_0cj5g")
+PanelDarkGray/base_type = &"Panel"
+PanelDarkGray/styles/panel = SubResource("StyleBoxFlat_61ybm")
 PanelGray/base_type = &"Panel"
 PanelGray/styles/panel = SubResource("StyleBoxFlat_l40fq")

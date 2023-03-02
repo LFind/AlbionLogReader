@@ -8,6 +8,9 @@ const PATH:String = "log.json"
 var files:Dictionary = {}
 
 
+func _ready():
+	load_log(PATH)
+
 func is_valid_log_string(log_string: String) -> bool:
 	var parts := log_string.split("\t")
 	RegEx.create_from_string("").search("").get_string()
@@ -120,12 +123,13 @@ func load_log(path:String) -> Dictionary:
 	return data
 
 
-func get_item_count(item_name: String, char: int = 0) -> int:
+func get_item_count(item_name: String) -> int:
 	var count_delta_sum = 0
 	
-	for entries in get_entries(item_name, "", char).values():
+	for entries in log_data.values():
 		for entry in entries:
-			count_delta_sum += entry["countDelta"]
+			if entry["item"] == item_name:
+				count_delta_sum += entry["countDelta"]
 	
 	return count_delta_sum
 
@@ -200,22 +204,22 @@ func compare_datetime(date1, date2) -> bool:
 		date1 = date_to_dict(date1)
 	if not date2 is Dictionary:
 		date2 = date_to_dict(date2)
-	if date1["year"] == date2["year"]:
-		if date1["month"] == date2["month"]:
-			if date1["day"] == date2["day"]:
-				if date1["hour"] == date2["hour"]:
-					if date1["minute"] == date2["minute"]:
-						result = date1["second"] - date2["second"]
+	if date1.get("year", 0) == date2.get("year", 0):
+		if date1.get("month", 0) == date2.get("month", 0):
+			if date1.get("day", 0) == date2.get("day", 0):
+				if date1.get("hour", 0) == date2.get("hour", 0):
+					if date1.get("minute", 0) == date2.get("minute", 0):
+						result = date1.get("second", 0) - date2.get("second", 0)
 					else:
-						result = date1["minute"] - date2["minute"]
+						result = date1.get("minute", 0) - date2.get("minute", 0)
 				else:
-					result = date1["hour"] - date2["hour"]
+					result = date1.get("hour", 0) - date2.get("hour", 0)
 			else:
-				result = date1["day"] - date2["day"]
+				result = date1.get("day", 0) - date2.get("day", 0)
 		else:
-			result = date1["month"] - date2["month"]
+			result = date1.get("month", 0) - date2.get("month", 0)
 	else:
-		result = date1["year"] - date2["year"]
+		result = date1.get("year", 0) - date2.get("year", 0)
 	
 	return result > 0
 	
@@ -234,23 +238,10 @@ func find_latest_date(log_data:Dictionary, item:String = "") -> Dictionary:
 
 func sort_by_date(logs:Dictionary) -> Dictionary:
 	var sorted_logs:Dictionary
-
+	
 	var keys_arr = logs.keys()
-#	keys_arr.sort_custom(compare_datetime)
-
+	
 	for key in keys_arr:
 		sorted_logs[key] = logs[key]
-
-	return sorted_logs
-
-#FIXME Некорректная сортировка по предмету (удалить за ненадобностью?)
-func sort_by_item(log_data: Dictionary) -> Dictionary:
-	var items = get_unique_items(log_data)
-	var sorted_logs:Dictionary
 	
-	items.sort()
-	for item in items:
-		for date in get_entries(item):
-			sorted_logs[date] = log_data[date]
-
 	return sorted_logs

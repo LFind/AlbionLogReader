@@ -1,45 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2v8yme3btu6f"]
+[gd_scene load_steps=6 format=3 uid="uid://c2v8yme3btu6f"]
 
-[ext_resource type="Texture2D" uid="uid://r1plrsirowa8" path="res://textures/unknown_icon.png" id="1_hqfxg"]
-
-[sub_resource type="GDScript" id="GDScript_noiqj"]
-script/source = "extends HBoxContainer
-
-@onready var texture_rect = %TextureRect
-@onready var button_name = %ButtonName
-@onready var button_count = %ButtonCount
-
-var entries:Dictionary
-var item:String:
-	set(value):
-		item = value
-		update.emit()
-var count:int
-var last_change:Dictionary
-
-signal update
-
-func _ready():
-	button_name.pressed.connect(func():
-		Event.request_window_item_info.emit(item)
-		)
-	
-	update.connect(_update)
-	_update()
-
-func _update():
-	if item != \"\":
-		tooltip_text = item
-		button_name.text = item
-		button_count.text = str(count)
-
-func set_item(item:String):
-	self.item = item
-	self.entries = LogData.get_entries(item)
-	self.count = LogData.get_item_count(item)
-	self.last_change = LogData.find_latest_date(self.entries, item)
-	var icon:CompressedTexture2D = preload(\"res://textures/unknown_icon.png\")
-"
+[ext_resource type="Texture2D" uid="uid://r1plrsirowa8" path="res://textures/unknown_icon.png" id="1_ud0lc"]
+[ext_resource type="Script" path="res://scenes/items_table/elements/table_item.gd" id="1_uh474"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_araqp"]
 corner_radius_top_left = 3
@@ -47,8 +9,14 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tst40"]
-bg_color = Color(0.211765, 0.211765, 0.211765, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n7h4d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qxeq"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="TableItem" type="HBoxContainer"]
 custom_minimum_size = Vector2(300, 40)
@@ -60,7 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 15
 size_flags_vertical = 0
-script = SubResource("GDScript_noiqj")
+script = ExtResource("1_uh474")
 metadata/_edit_vertical_guides_ = [300.0]
 metadata/_edit_horizontal_guides_ = [48.0]
 
@@ -79,8 +47,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_hqfxg")
-stretch_mode = 3
+texture = ExtResource("1_ud0lc")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="ButtonName" type="Button" parent="."]
 unique_name_in_owner = true
@@ -98,5 +67,16 @@ custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_tst40")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_n7h4d")
 text = "-99999"
+
+[node name="Panel" type="Panel" parent="ButtonCount"]
+modulate = Color(0.211765, 0.211765, 0.211765, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4qxeq")

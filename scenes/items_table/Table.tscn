@@ -1,0 +1,321 @@
+[gd_scene load_steps=9 format=3 uid="uid://d0ax5kif4xvgp"]
+
+[ext_resource type="Theme" uid="uid://bm4dl3c55ph6g" path="res://Theme.tres" id="1_jnm2q"]
+[ext_resource type="Script" path="res://scenes/items_table/Table.gd" id="2_77u6g"]
+[ext_resource type="Script" path="res://addons/SmoothScroll/SmoothScrollContainer.gd" id="3_t3hwi"]
+[ext_resource type="PackedScene" uid="uid://c2v8yme3btu6f" path="res://scenes/items_table/elements/table_item.tscn" id="4_uhjrh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w4jkl"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_acpqm"]
+bg_color = Color(0.211765, 0.211765, 0.211765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ge0i3"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vywr4"]
+line_spacing = 0.0
+font_size = 10
+font_color = Color(1, 1, 1, 0.39)
+
+[node name="Table" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_jnm2q")
+script = ExtResource("2_77u6g")
+
+[node name="PanelTable" type="Panel" parent="."]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+metadata/_edit_vertical_guides_ = [325.0]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelTable"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SearchContainer" type="MarginContainer" parent="PanelTable/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelTable/VBoxContainer/SearchContainer"]
+layout_mode = 2
+
+[node name="SearchField" type="LineEdit" parent="PanelTable/VBoxContainer/SearchContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "фывфывфыв"
+placeholder_text = "Поиск..."
+select_all_on_focus = true
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="SortOption" type="OptionButton" parent="PanelTable/VBoxContainer/SearchContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+focus_mode = 1
+toggle_mode = false
+alignment = 1
+text_overrun_behavior = 3
+icon_alignment = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "Тип сортировки"
+popup/item_0/id = 1
+
+[node name="TableContainer" type="MarginContainer" parent="PanelTable/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Panel" type="Panel" parent="PanelTable/VBoxContainer/TableContainer"]
+clip_contents = true
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"PanelGray"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelTable/VBoxContainer/TableContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="SmoothScrollContainer2" type="ScrollContainer" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+script = ExtResource("3_t3hwi")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ItemsContainer" type="VBoxContainer" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+metadata/_edit_group_ = true
+
+[node name="TableItem" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem2" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem3" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem4" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem5" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem6" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem7" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem8" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem9" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem10" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem11" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem12" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem13" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem14" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem15" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem16" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem17" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem18" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem19" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem20" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem21" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="TableItem22" parent="PanelTable/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+layout_mode = 2
+metadata/_edit_vertical_guides_ = [298.0]
+metadata/_edit_horizontal_guides_ = [40.0]
+
+[node name="Panel" type="Panel" parent="PanelTable/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelTable/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelTable/VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="ButtonRefresh" type="Button" parent="PanelTable/VBoxContainer/Panel/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_w4jkl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_acpqm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ge0i3")
+text = "Обновить"
+
+[node name="ButtonSettings" type="Button" parent="PanelTable/VBoxContainer/Panel/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_w4jkl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_acpqm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ge0i3")
+text = "Настройки"
+
+[node name="ButtonAddLog" type="Button" parent="PanelTable/VBoxContainer/Panel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Должно содержаться в буфере обмена"
+focus_mode = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_w4jkl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_acpqm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ge0i3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelTable/VBoxContainer/Panel/HBoxContainer/ButtonAddLog"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelTable/VBoxContainer/Panel/HBoxContainer/ButtonAddLog/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+text = "Вставить логи"
+horizontal_alignment = 1
+
+[node name="LabelDesc" type="Label" parent="PanelTable/VBoxContainer/Panel/HBoxContainer/ButtonAddLog/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+text = "(из буфера)"
+label_settings = SubResource("LabelSettings_vywr4")
+horizontal_alignment = 1

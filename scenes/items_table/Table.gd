@@ -11,17 +11,20 @@ enum Sort {
 
 @onready var container_items:Control = %ItemsContainer
 @onready var search_field = %SearchField
+@onready var sort_option:OptionButton = %SortOption
 @onready var button_add_log = %ButtonAddLog
-@onready var sort_option = %SortOption
+@onready var button_refresh = %ButtonRefresh
+@onready var button_settings = %ButtonSettings
 
 
 var item_nodes:Array[Node]
-var sorter:Sort
 
 func _ready():
 	DisplayServer.window_set_size(Vector2i(size))
 	DisplayServer.window_can_draw()
 	Event.update_logs.connect(_update)
+	
+	button_refresh.pressed.connect(reload)
 	
 	button_add_log.pressed.connect(func():
 		LogData.append_logs(LogData.parse(DisplayServer.clipboard_get()))
@@ -49,7 +52,7 @@ func _ready():
 	sort_option.set_item_text(Sort.DATE_OLDEST, "По изменению (Возв.)")
 	sort_option.set_item_text(Sort.DATE_LATEST, "По изменению (Убыв.)")
 	
-	sort_option.item_selected.connect(func(index:int): _sort())
+	sort_option.item_selected.connect(func(_index:int):_sort())
 	
 	var clear_item_nodes = func():
 		for node in container_items.get_children():
@@ -98,7 +101,8 @@ func _ready():
 	sort_option.set_item_metadata(Sort.COUNT_UP, sort_option.get_item_metadata(Sort.COUNT_DOWN).bind(true))
 	
 	search_field.clear()
-	LogData.load_log(LogData.PATH)
+	
+	_update()
 
 func _unhandled_input(event):
 	if event.is_action("ui_mouse_left"):
@@ -106,18 +110,27 @@ func _unhandled_input(event):
 		if focused_node:
 			focused_node.release_focus()
 
+func reload():
+	LogData.load_log(LogData.PATH)
+	var focused_node:Control = get_viewport().gui_get_focus_owner()
+	if focused_node:
+		focused_node.release_focus()
+
 func _input(event):
 	if event.is_action("reload"):
-		LogData.load_log(LogData.PATH)
+		reload()
 
 func _update():
 	for node in container_items.get_children():
 		node.queue_free()
+	item_nodes.clear()
 	
+	var item_tscn = preload("res://scenes/items_table/elements/table_item.tscn")
 	for item in LogData.get_unique_items(LogData.log_data):
-		var scene = preload("res://scenes/elements/table_item.tscn").instantiate()
+		var scene = item_tscn.instantiate()
 		scene.set_item(item)
 		item_nodes.append(scene)
+	
 	_sort()
 
 func _sort():
