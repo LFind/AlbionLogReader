@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2jlg8elxgfqu"]
+[gd_scene load_steps=10 format=3 uid="uid://b2jlg8elxgfqu"]
 
 [ext_resource type="Script" path="res://scenes/item_options/ItemOptionsPane.gd" id="1_v5wd4"]
 [ext_resource type="Texture2D" uid="uid://r1plrsirowa8" path="res://textures/unknown_icon.png" id="2_dmpmd"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmu5d"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37cgm"]
 bg_color = Color(0.368627, 0.133333, 0.133333, 1)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
@@ -23,6 +23,15 @@ shadow_offset = Vector2(3, 3)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m3s74"]
 bg_color = Color(0.880582, 0.483425, 0.466988, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 1
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmu5d"]
+bg_color = Color(0.223529, 0.0666667, 0.0666667, 1)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
@@ -84,9 +93,11 @@ focus_mode = 0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ButtonRed"
-theme_override_styles/normal = SubResource("StyleBoxFlat_cmu5d")
+theme_override_styles/normal = SubResource("StyleBoxFlat_37cgm")
 theme_override_styles/hover = SubResource("StyleBoxFlat_i8svu")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_m3s74")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_cmu5d")
+disabled = true
 text = "Удалить все записи!"
 
 [node name="PanelColor" type="Panel" parent="."]

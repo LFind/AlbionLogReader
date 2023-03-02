@@ -4,6 +4,7 @@ extends Window
 
 
 func _ready():
+	visible = false
 	close_requested.connect(_on_close_requested)
 	Event.request_window_item_options.connect(_on_request_window)
 	
