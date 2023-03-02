@@ -10,7 +10,6 @@ var config:ConfigFile = ConfigFile.new()
  
 
 func _ready():
-#	add_child(preload("res://scenes/WindowGlobalSettings.tscn").instantiate())
 	load_config()
 
 func save_config(path:String = PATH):

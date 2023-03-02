@@ -16,6 +16,7 @@ enum Sort {
 @onready var button_refresh = %ButtonRefresh
 @onready var button_settings = %ButtonSettings
 
+@onready var animation_player = %AnimationPlayer
 
 var item_nodes:Array[Node]
 
@@ -23,6 +24,8 @@ func _ready():
 	DisplayServer.window_set_size(Vector2i(size))
 	DisplayServer.window_can_draw()
 	Event.update_logs.connect(_update)
+	
+	button_settings.pressed.connect(animation_player.play.bind("switch"))
 	
 	button_refresh.pressed.connect(reload)
 	

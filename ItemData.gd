@@ -1,6 +1,6 @@
 extends Node
 
-const UNKNOWN_ICON = "./textures/unknown_icon.png"
+const UNKNOWN_ICON = "res://textures/unknown_icon.png"
 const DIR_ICONS = "./icons/"
 const PATH = "items.ini"
 
@@ -67,15 +67,24 @@ func set_count_low(item:String, count:int):
 
 func get_icon(item:String, size:Vector2i = Vector2i(32,32)) -> ImageTexture:
 	var icon_file:String = items_data.get_value(item,"icon", "").strip_edges()
-	var path:String = DIR_ICONS + icon_file if icon_file in get_icons() else UNKNOWN_ICON
-	
-	var image = ImageTexture.create_from_image(Image.load_from_file(path))
+	var path:String
+	var image:ImageTexture
+	if icon_file in get_icons():
+		image = ImageTexture.create_from_image(Image.load_from_file(DIR_ICONS + icon_file))
+	else:
+		image = ImageTexture.create_from_image(load(UNKNOWN_ICON).get_image())
 	image.set_size_override(size)
 	return image
 
 func get_icon_by_filename(filename:String, size:Vector2i = Vector2i(32,32)) -> ImageTexture:
 	var path:String = DIR_ICONS + filename if filename in get_icons() else UNKNOWN_ICON
 	var image = ImageTexture.create_from_image(Image.load_from_file(path))
+	
+	if filename in get_icons():
+		image = ImageTexture.create_from_image(Image.load_from_file(DIR_ICONS + filename))
+	else:
+		image = ImageTexture.create_from_image(load(UNKNOWN_ICON).get_image())
+	
 	image.set_size_override(size)
 	return image
 

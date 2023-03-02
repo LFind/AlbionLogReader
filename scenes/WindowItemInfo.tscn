@@ -1,19 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://drg0vegnjjhog"]
+[gd_scene load_steps=5 format=3 uid="uid://drg0vegnjjhog"]
 
 [ext_resource type="Script" path="res://scenes/WindowItemInfo.gd" id="1_pgndo"]
 [ext_resource type="PackedScene" uid="uid://c53tdl0r0rl30" path="res://scenes/WindowItemOptions.tscn" id="2_lcwfs"]
 [ext_resource type="PackedScene" uid="uid://bisbl2w5xhocw" path="res://scenes/item_info/ItemInfoPane.tscn" id="2_wk75k"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jo3n4"]
-bg_color = Color(0.141176, 0.141176, 0.141176, 1)
-border_color = Color(0.996078, 0.701961, 0.811765, 1)
-expand_margin_left = 8.0
-expand_margin_top = 32.0
-expand_margin_right = 8.0
-expand_margin_bottom = 8.0
-shadow_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
-shadow_size = 25
-anti_aliasing_size = 0.1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vcr3g"]
 bg_color = Color(0.141176, 0.141176, 0.141176, 1)
@@ -31,8 +20,8 @@ script = ExtResource("1_pgndo")
 [node name="WindowItemOptions" parent="." instance=ExtResource("2_lcwfs")]
 initial_position = 0
 position = Vector2i(50, 50)
+visible = false
 exclusive = false
-theme_override_styles/embedded_border = SubResource("StyleBoxFlat_jo3n4")
 
 [node name="ItemInfoPane" parent="." instance=ExtResource("2_wk75k")]
 
