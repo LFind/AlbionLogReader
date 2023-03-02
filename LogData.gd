@@ -178,6 +178,16 @@ func get_unique_players(logs:Dictionary) -> Array[String]:
 
 
 func date_to_dict(datetime:String) -> Dictionary:
+	datetime = datetime.strip_edges()
+	if datetime == "": return {
+		"year": -1,
+		"month": -1,
+		"day": -1,
+		"hour": -1,
+		"minute": -1,
+		"second": -1
+	}
+	
 	var split_str = datetime.split(" ")
 	var date = split_str[0]
 	var time = split_str[1]
@@ -225,7 +235,7 @@ func compare_datetime(date1, date2) -> bool:
 	
 
 func find_latest_date(log_data:Dictionary, item:String = "") -> Dictionary:
-	var lastest_datetime: Dictionary = date_to_dict(log_data.keys()[0])
+	var lastest_datetime: Dictionary = date_to_dict("")
 	var last_datetime: Dictionary = lastest_datetime
 	for datetime in log_data.keys():
 		for entry in log_data[datetime]:
@@ -234,6 +244,7 @@ func find_latest_date(log_data:Dictionary, item:String = "") -> Dictionary:
 				if compare_datetime(current_datetime, last_datetime):
 					last_datetime = current_datetime
 					lastest_datetime = entry
+	
 	return last_datetime
 
 func sort_by_date(logs:Dictionary) -> Dictionary:

@@ -129,7 +129,7 @@ func _update():
 	item_nodes.clear()
 	
 	var item_tscn = preload("res://scenes/items_table/elements/table_item.tscn")
-	for item in LogData.get_unique_items(LogData.log_data):
+	for item in ItemData.get_items():
 		var scene = item_tscn.instantiate()
 		scene.set_item(item)
 		item_nodes.append(scene)
