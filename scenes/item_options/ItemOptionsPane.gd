@@ -59,7 +59,7 @@ func set_icon_preview(filename:String):
 func _update_icons_popup():
 	var text = icon_file_field.text.strip_edges()
 	icon_list_popup.deselect_all()
-	if text != "":
+	if text != "" and icon_file_field.has_focus():
 		var icons_found:Array
 		
 		if text != "":
@@ -104,6 +104,9 @@ func _release_focus():
 	var focused_node:Control = get_window().gui_get_focus_owner()
 	if focused_node:
 		focused_node.release_focus()
+	
+	if focused_node == icon_file_field:
+		_update_icons_popup()
 
 func _unhandled_input(event):
 	if event.is_action("ui_mouse_left"):
