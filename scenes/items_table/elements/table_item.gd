@@ -28,19 +28,21 @@ func _ready():
 	button_name.pressed.connect(func():
 		Event.request_window_item_info.emit(self.item)
 		)
-	Event.update_settings.connect(_update_settings)
+	Event.update_settings.connect(func(key,value): if key == Settigs.Key.SHOW_HIDDEN: _update_visibility())
 	Event.update_item_settings.connect(func(item_name): if item_name == self.item: update.emit())
 	panel_count.get_theme_stylebox("panel")
 	update.connect(_update)
 	_update()
 
-func _update_settings(section, key, value):
-	if section != SECTION: return
-	match key:
-		CONFIG_SHOW_HIDDEN: visible = not ItemData.is_hidden(item) or value
+func _update_visibility():
+	visible = item != "" and (not ItemData.is_hidden(item) or Settigs.get_show_hidden())
+	if visible:
+		var hidden_a = 0.7
+		modulate.a = hidden_a if ItemData.is_hidden(item) else 1.0
 
 func _update():
 	if item != "":
+		_update_visibility()
 		self.entries = LogData.get_entries(self.item)
 		self.count = LogData.get_item_count(self.item)
 		self.last_change = LogData.find_latest_date(self.entries, self.item)
@@ -49,8 +51,6 @@ func _update():
 		button_name.text = self.item
 		button_count.text = str(self.count)
 		texture_rect.texture =  ItemData.get_icon(self.item)
-		
-		visible = not ItemData.is_hidden(item) or Settigs.get_value(SECTION, CONFIG_SHOW_HIDDEN, true)
 		
 		if self.count <= ItemData.get_count_min(self.item):
 			panel_count.modulate = COLOR_MIN

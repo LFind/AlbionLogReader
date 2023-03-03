@@ -15,6 +15,7 @@ enum Sort {
 @onready var button_add_log = %ButtonAddLog
 @onready var button_refresh = %ButtonRefresh
 @onready var button_settings = %ButtonSettings
+@onready var button_show_hidden = %ButtonShowHidden
 
 @onready var animation_player = %AnimationPlayer
 
@@ -24,6 +25,18 @@ func _ready():
 	DisplayServer.window_set_size(Vector2i(size))
 	DisplayServer.window_can_draw()
 	Event.update_logs.connect(_update)
+	
+	# Кнопка показа скрытых предметов
+	var icon_show = preload("res://textures/eye_show1.png")
+	var icon_hide = preload("res://textures/eye_hide.png")
+	button_show_hidden.button_pressed = Settigs.get_show_hidden()
+	button_show_hidden.pressed.connect(func():
+		if button_show_hidden.button_pressed:
+			button_show_hidden.icon = icon_show
+		else:
+			button_show_hidden.icon = icon_hide
+		Settigs.set_show_hidden(button_show_hidden.button_pressed)
+		)
 	
 	button_settings.pressed.connect(animation_player.play.bind("switch"))
 	

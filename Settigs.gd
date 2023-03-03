@@ -1,7 +1,7 @@
 extends Node
 #TODO Меню общих настроек
-enum Section {
-	TABLE
+enum Key {
+	SHOW_HIDDEN
 }
 
 const PATH = "config.ini"
@@ -18,18 +18,22 @@ func save_config(path:String = PATH):
 func load_config(path:String = PATH):
 	config.load(PATH)
 
-func set_value(section: String, key: String, value: Variant):
-	section = section.to_upper()
+func set_value(key: String, value):
 	key = key.to_lower()
-	config.set_value(section, key, value)
-	Event.update_setting.emit(section, key, value)
+	config.set_value("", key, value)
 	save_config()
 
-func get_value(section: String, key: String, default: Variant = null):
-	section = section.to_upper()
+func get_value(key: String, default = null):
 	key = key.to_lower()
-	if not config.has_section_key(section, key):
-		config.set_value(section, key, default)
+	if not config.has_section_key("", key):
+		config.set_value("", key, default)
 		save_config()
 		return default
-	return config.get_value(section, key, default)
+	return config.get_value("", key, default)
+
+func get_show_hidden() -> bool:
+	return get_value("show_hidden", false)
+
+func set_show_hidden(value:bool):
+	set_value("show_hidden", value)
+	Event.update_settings.emit(Key.SHOW_HIDDEN, value)

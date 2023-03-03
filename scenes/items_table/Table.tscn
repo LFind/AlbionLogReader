@@ -1,10 +1,32 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0ax5kif4xvgp"]
+[gd_scene load_steps=16 format=3 uid="uid://bgg4ybe3v23rw"]
 
 [ext_resource type="Theme" uid="uid://bm4dl3c55ph6g" path="res://Theme.tres" id="1_jnm2q"]
 [ext_resource type="Script" path="res://scenes/items_table/Table.gd" id="2_77u6g"]
 [ext_resource type="Script" path="res://addons/SmoothScroll/SmoothScrollContainer.gd" id="3_t3hwi"]
+[ext_resource type="Texture2D" uid="uid://b64os3fad7swk" path="res://textures/eye_hide.png" id="4_ab2fm"]
 [ext_resource type="PackedScene" uid="uid://c2v8yme3btu6f" path="res://scenes/items_table/elements/table_item.tscn" id="4_uhjrh"]
 [ext_resource type="PackedScene" uid="uid://cfy5dp4a3v7on" path="res://scenes/items_table/SettingsPane.tscn" id="5_kyjag"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pwxes"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65mrd"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w4jkl"]
 bg_color = Color(0.141176, 0.141176, 0.141176, 1)
@@ -137,17 +159,17 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="SearchContainer" type="MarginContainer" parent="TablePane/VBoxContainer"]
+[node name="Header" type="MarginContainer" parent="TablePane/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TablePane/VBoxContainer/SearchContainer"]
+[node name="SearchContainer" type="HBoxContainer" parent="TablePane/VBoxContainer/Header"]
 layout_mode = 2
 
-[node name="SearchField" type="LineEdit" parent="TablePane/VBoxContainer/SearchContainer/HBoxContainer"]
+[node name="SearchField" type="LineEdit" parent="TablePane/VBoxContainer/Header/SearchContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -157,11 +179,12 @@ select_all_on_focus = true
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="SortOption" type="OptionButton" parent="TablePane/VBoxContainer/SearchContainer/HBoxContainer"]
+[node name="SortOption" type="OptionButton" parent="TablePane/VBoxContainer/Header/SearchContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 25)
 layout_mode = 2
 focus_mode = 1
+mouse_default_cursor_shape = 2
 toggle_mode = false
 alignment = 1
 text_overrun_behavior = 3
@@ -170,6 +193,20 @@ item_count = 1
 selected = 0
 popup/item_0/text = "Тип сортировки"
 popup/item_0/id = 1
+
+[node name="ButtonShowHidden" type="Button" parent="TablePane/VBoxContainer/Header/SearchContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_pwxes")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pwxes")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_65mrd")
+toggle_mode = true
+icon = ExtResource("4_ab2fm")
+expand_icon = true
 
 [node name="TableContainer" type="MarginContainer" parent="TablePane/VBoxContainer"]
 layout_mode = 2
@@ -221,6 +258,7 @@ metadata/_edit_vertical_guides_ = [298.0]
 metadata/_edit_horizontal_guides_ = [40.0]
 
 [node name="TableItem2" parent="TablePane/VBoxContainer/TableContainer/Panel/VBoxContainer/SmoothScrollContainer2/MarginContainer/ItemsContainer" instance=ExtResource("4_uhjrh")]
+modulate = Color(1, 1, 1, 0.701961)
 layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 metadata/_edit_horizontal_guides_ = [40.0]
@@ -325,12 +363,12 @@ layout_mode = 2
 metadata/_edit_vertical_guides_ = [298.0]
 metadata/_edit_horizontal_guides_ = [40.0]
 
-[node name="Panel" type="Panel" parent="TablePane/VBoxContainer"]
+[node name="Footer" type="Panel" parent="TablePane/VBoxContainer"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TablePane/VBoxContainer/Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TablePane/VBoxContainer/Footer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -339,12 +377,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TablePane/VBoxContainer/Panel/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TablePane/VBoxContainer/Footer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 1
 alignment = 1
 
-[node name="ButtonRefresh" type="Button" parent="TablePane/VBoxContainer/Panel/HBoxContainer/VBoxContainer"]
+[node name="ButtonRefresh" type="Button" parent="TablePane/VBoxContainer/Footer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
@@ -357,7 +395,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_acpqm")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ge0i3")
 text = "Обновить"
 
-[node name="ButtonSettings" type="Button" parent="TablePane/VBoxContainer/Panel/HBoxContainer/VBoxContainer"]
+[node name="ButtonSettings" type="Button" parent="TablePane/VBoxContainer/Footer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
@@ -371,7 +409,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ge0i3")
 disabled = true
 text = "Настройки"
 
-[node name="ButtonAddLog" type="Button" parent="TablePane/VBoxContainer/Panel/HBoxContainer"]
+[node name="ButtonAddLog" type="Button" parent="TablePane/VBoxContainer/Footer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -383,7 +421,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_w4jkl")
 theme_override_styles/hover = SubResource("StyleBoxFlat_acpqm")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ge0i3")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TablePane/VBoxContainer/Panel/HBoxContainer/ButtonAddLog"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TablePane/VBoxContainer/Footer/HBoxContainer/ButtonAddLog"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -394,13 +432,13 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Label" type="Label" parent="TablePane/VBoxContainer/Panel/HBoxContainer/ButtonAddLog/VBoxContainer"]
+[node name="Label" type="Label" parent="TablePane/VBoxContainer/Footer/HBoxContainer/ButtonAddLog/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/line_spacing = 0
 text = "Вставить логи"
 horizontal_alignment = 1
 
-[node name="LabelDesc" type="Label" parent="TablePane/VBoxContainer/Panel/HBoxContainer/ButtonAddLog/VBoxContainer"]
+[node name="LabelDesc" type="Label" parent="TablePane/VBoxContainer/Footer/HBoxContainer/ButtonAddLog/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/line_spacing = 0
 text = "(из буфера)"

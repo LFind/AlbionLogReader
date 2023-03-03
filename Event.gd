@@ -1,6 +1,6 @@
 extends Node
 
-signal update_settings(section:String, key:String, value:Variant)
+signal update_settings(key:Settigs.Key, value:Variant)
 signal update_item_settings(item_name:String)
 signal update_logs
 signal update_items
