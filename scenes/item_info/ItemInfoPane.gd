@@ -71,6 +71,26 @@ var item:String:
 	set(value):
 		item = value
 		_update_table()
+		
+		# Выставление заглушек на выборе диапозона дат
+		var date_min:Dictionary
+		var date_max:Dictionary
+		
+		for date in data.keys():
+			date = LogData.date_to_dict(date)
+			if date_max == {} or LogData.compare_datetime(date, date_min):
+				date_max = date
+			if date_min == {} or not LogData.compare_datetime(date, date_min):
+				date_min = date
+		
+		if date_min != {} and date_min != {}:
+			spin_box_begin_dd.value = date_min["day"]
+			spin_box_begin_mm.value = date_min["month"]
+			spin_box_begin_yy.value = date_min["year"]
+			spin_box_end_dd.value = date_max["day"]
+			spin_box_end_mm.value = date_max["month"]
+			spin_box_end_yy.value = date_max["year"]
+		
 var is_ready:bool
 var count:int
 var data:Dictionary
@@ -152,7 +172,7 @@ func _ready():
 		spin_textedit.alignment = HORIZONTAL_ALIGNMENT_CENTER
 		spin_textedit.size.x = 20
 	
-	Event.removed_all_entries.connect(func(item): if self.item == item: _update_table())
+	Event.removed_all_entries.connect(func(item): if self.item == item: set_item(item))
 
 func _process(delta):
 	header_container.position.x = item_list_container.position.x
@@ -179,25 +199,12 @@ func _update_table():
 	var data_filtred = data.duplicate(true)
 	count = 0
 	
-	# Выставление заглушек на выборе диапозона дат
-	var date_min:Dictionary
-	var date_max:Dictionary
+	# Выключение выбора диапозона дат
+	for spin_box in [spin_box_begin_dd,spin_box_begin_mm,spin_box_begin_yy]:
+		spin_box.get_line_edit().editable = check_box_date_begin.button_pressed
 	
-	for date in data.keys():
-		date = LogData.date_to_dict(date)
-		if date_max == {} or LogData.compare_datetime(date, date_min):
-			date_max = date
-		if date_min == {} or not LogData.compare_datetime(date, date_min):
-			date_min = date
-	
-	if date_min != {} and date_min != {}:
-		spin_box_begin_dd.get_line_edit().text = str(date_min["day"])
-		spin_box_begin_mm.get_line_edit().text = str(date_min["month"])
-		spin_box_begin_yy.get_line_edit().text = str(date_min["year"])
-		spin_box_end_dd.get_line_edit().text = str(date_max["day"])
-		spin_box_end_mm.get_line_edit().text = str(date_max["month"])
-		spin_box_end_yy.get_line_edit().text = str(date_max["year"])
-	
+	for spin_box in [spin_box_end_dd,spin_box_end_mm,spin_box_end_yy]:
+		spin_box.get_line_edit().editable = check_box_date_end.button_pressed
 	
 	# Очистка каждого столбца
 	for column in columns.values():
@@ -210,25 +217,25 @@ func _update_table():
 		
 		# Проверка на соответствие фильтра начальной даты
 		if check_box_date_begin.button_pressed:
-			if LogData.compare_datetime(date,{
+			if LogData.compare_datetime({
 				"year": spin_box_begin_yy.value,
 				"month": spin_box_begin_mm.value,
 				"day": spin_box_begin_dd.value,
 				"hour": 0,
 				"minute": 0,
 				"second": 0
-			}): continue
+			},date): continue
 		
 		# Проверка на соответствие фильтра конечной даты
 		if check_box_date_end.button_pressed:
-			if LogData.compare_datetime({
+			if LogData.compare_datetime(date, {
 				"year": spin_box_end_yy.value,
 				"month": spin_box_end_mm.value,
 				"day": spin_box_end_dd.value,
-				"hour": 0,
-				"minute": 0,
-				"second": 0
-			},date): continue
+				"hour": 23,
+				"minute": 59,
+				"second": 59
+			}): continue
 		
 		# Фильтрация по данным записи
 		data_filtred[date] = data_filtred[date].filter(func(entry:Dictionary):

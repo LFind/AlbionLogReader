@@ -108,7 +108,7 @@ SplitContainer/icons/h_grabber = ExtResource("2_nv3r0")
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cqnq"]
 bg_color = Color(0.212305, 0.212305, 0.212305, 1)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_6jt5g"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_2unyr"]
 
 [node name="ItemInfoPane" type="Panel"]
 custom_minimum_size = Vector2(560, 560)
@@ -335,7 +335,7 @@ layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
 toggle_mode = true
-button_group = SubResource("ButtonGroup_6jt5g")
+button_group = SubResource("ButtonGroup_2unyr")
 text = "Дата"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer"]
@@ -349,7 +349,7 @@ layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
 toggle_mode = true
-button_group = SubResource("ButtonGroup_6jt5g")
+button_group = SubResource("ButtonGroup_2unyr")
 text = "Игрок"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer"]
@@ -363,7 +363,7 @@ layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
 toggle_mode = true
-button_group = SubResource("ButtonGroup_6jt5g")
+button_group = SubResource("ButtonGroup_2unyr")
 text = "Предмет"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer"]
@@ -377,7 +377,7 @@ layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
 toggle_mode = true
-button_group = SubResource("ButtonGroup_6jt5g")
+button_group = SubResource("ButtonGroup_2unyr")
 text = "Чары"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
@@ -391,7 +391,7 @@ layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
 toggle_mode = true
-button_group = SubResource("ButtonGroup_6jt5g")
+button_group = SubResource("ButtonGroup_2unyr")
 text = "Качество"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
@@ -405,7 +405,7 @@ layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
 toggle_mode = true
-button_group = SubResource("ButtonGroup_6jt5g")
+button_group = SubResource("ButtonGroup_2unyr")
 text = "Количество"
 
 [node name="Panel" type="Control" parent="TablePanel/VBoxRight/Table/PanelHeader/HeaderContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer/HSplitContainer"]
@@ -546,11 +546,11 @@ theme_override_constants/h_separation = 50
 theme_override_constants/v_separation = 10
 metadata/_edit_group_ = true
 
-[node name="DateBegin" type="HBoxContainer" parent="TablePanel/VBoxRight/FilterDate"]
+[node name="DateBeginContainer" type="HBoxContainer" parent="TablePanel/VBoxRight/FilterDate"]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 
-[node name="CheckBoxDateBegin" type="CheckBox" parent="TablePanel/VBoxRight/FilterDate/DateBegin"]
+[node name="CheckBoxDateBegin" type="CheckBox" parent="TablePanel/VBoxRight/FilterDate/DateBeginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -559,7 +559,7 @@ mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "Начало:"
 
-[node name="SpinBoxBeginDD" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateBegin"]
+[node name="SpinBoxBeginDD" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateBeginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -567,14 +567,14 @@ mouse_filter = 1
 max_value = 31.0
 alignment = 1
 
-[node name="SpinBoxBeginMM" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateBegin"]
+[node name="SpinBoxBeginMM" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateBeginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 1
 max_value = 12.0
 alignment = 1
 
-[node name="SpinBoxBeginYY" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateBegin"]
+[node name="SpinBoxBeginYY" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateBeginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 1
@@ -583,11 +583,11 @@ max_value = 2222.0
 value = 2020.0
 alignment = 1
 
-[node name="DateEnd" type="HBoxContainer" parent="TablePanel/VBoxRight/FilterDate"]
+[node name="DateEndContainer" type="HBoxContainer" parent="TablePanel/VBoxRight/FilterDate"]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 
-[node name="CheckBoxDateEnd" type="CheckBox" parent="TablePanel/VBoxRight/FilterDate/DateEnd"]
+[node name="CheckBoxDateEnd" type="CheckBox" parent="TablePanel/VBoxRight/FilterDate/DateEndContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -596,7 +596,7 @@ mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "Конец:"
 
-[node name="SpinBoxEndDD" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateEnd"]
+[node name="SpinBoxEndDD" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateEndContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -604,14 +604,14 @@ mouse_filter = 1
 max_value = 31.0
 alignment = 1
 
-[node name="SpinBoxEndMM" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateEnd"]
+[node name="SpinBoxEndMM" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateEndContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 1
 max_value = 12.0
 alignment = 1
 
-[node name="SpinBoxEndYY" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateEnd"]
+[node name="SpinBoxEndYY" type="SpinBox" parent="TablePanel/VBoxRight/FilterDate/DateEndContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 1
