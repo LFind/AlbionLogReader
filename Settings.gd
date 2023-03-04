@@ -5,7 +5,7 @@ enum Key {
 }
 
 const TITLE = "AlbionLogReader"
-const VERSION = "0.7b"
+const VERSION = "0.75b"
 const PATH = "config.ini"
 
 var config:ConfigFile = ConfigFile.new()

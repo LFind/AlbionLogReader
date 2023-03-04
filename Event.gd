@@ -1,7 +1,7 @@
 extends Node
 
 signal removed_all_entries(item:String)
-signal update_settings(key:Settigs.Key, value:Variant)
+signal update_settings(key:Settings.Key, value:Variant)
 signal update_item_settings(item_name:String)
 signal update_logs
 signal update_items

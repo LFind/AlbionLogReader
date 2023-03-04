@@ -28,14 +28,14 @@ func _ready():
 	button_name.pressed.connect(func():
 		Event.request_window_item_info.emit(self.item)
 		)
-	Event.update_settings.connect(func(key,value): if key == Settigs.Key.SHOW_HIDDEN: _update_visibility())
+	Event.update_settings.connect(func(key,value): if key == Settings.Key.SHOW_HIDDEN: _update_visibility())
 	Event.update_item_settings.connect(func(item_name): if item_name == self.item: update.emit())
 	panel_count.get_theme_stylebox("panel")
 	update.connect(_update)
 	_update()
 
 func _update_visibility():
-	visible = item != "" and (not ItemData.is_hidden(item) or Settigs.get_show_hidden())
+	visible = item != "" and (not ItemData.is_hidden(item) or Settings.get_show_hidden())
 	if visible:
 		var hidden_a = 0.7
 		modulate.a = hidden_a if ItemData.is_hidden(item) else 1.0

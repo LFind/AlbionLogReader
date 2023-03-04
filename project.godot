@@ -22,7 +22,8 @@ ItemData="*res://ItemData.gd"
 LogData="*res://LogData.gd"
 Event="*res://Event.gd"
 WindowItemInfo="*res://scenes/WindowItemInfo.tscn"
-Settigs="*res://Settigs.gd"
+Settings="*res://Settings.gd"
+UpdateChecker="*res://UpdateChecker.gd"
 
 [display]
 
