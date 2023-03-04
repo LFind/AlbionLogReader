@@ -17,14 +17,19 @@ enum Sort {
 @onready var button_settings = %ButtonSettings
 @onready var button_show_hidden = %ButtonShowHidden
 
+@onready var link_update = %LinkUpdate
+
 @onready var animation_player = %AnimationPlayer
 
 var item_nodes:Array[Node]
 
 func _ready():
-	DisplayServer.window_set_size(Vector2i(size))
-	DisplayServer.window_can_draw()
 	Event.update_logs.connect(_update)
+	Event.new_release.connect(func():
+		link_update.visible = true
+		link_update.text = link_update.text.format({"version": UpdateChecker.get_latest_version()})
+		link_update.uri = UpdateChecker.get_latest_release_link()
+		)
 	
 	# Кнопка показа скрытых предметов
 	var icon_show = preload("res://textures/eye_show1.png")
