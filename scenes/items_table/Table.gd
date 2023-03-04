@@ -61,11 +61,11 @@ func _ready():
 	
 	sort_option.clear()
 	for i in Sort.values(): sort_option.add_item("")
-	sort_option.set_item_text(Sort.NAME_UP, "По предмету (Возв.)")
+	sort_option.set_item_text(Sort.NAME_UP, "По предмету (Возр.)")
 	sort_option.set_item_text(Sort.NAME_DOWN, "По предмету (Убыв.)")
-	sort_option.set_item_text(Sort.COUNT_UP, "По количеству (Возв.)")
+	sort_option.set_item_text(Sort.COUNT_UP, "По количеству (Возр.)")
 	sort_option.set_item_text(Sort.COUNT_DOWN, "По количеству (Убыв.)")
-	sort_option.set_item_text(Sort.DATE_OLDEST, "По изменению (Возв.)")
+	sort_option.set_item_text(Sort.DATE_OLDEST, "По изменению (Возр.)")
 	sort_option.set_item_text(Sort.DATE_LATEST, "По изменению (Убыв.)")
 	
 	sort_option.item_selected.connect(func(_index:int):_sort())
@@ -91,6 +91,7 @@ func _ready():
 		add_item_nodes.call()
 		)
 	sort_option.set_item_metadata(Sort.DATE_LATEST, func(reverse:bool = false):
+		sort_option.get_item_metadata(Sort.NAME_DOWN).call()
 		clear_item_nodes.call()
 		item_nodes.sort_custom(func(a, b) -> bool:
 			return LogData.compare_datetime(a.last_change, b.last_change))
@@ -99,6 +100,7 @@ func _ready():
 		add_item_nodes.call()
 		)
 	sort_option.set_item_metadata(Sort.COUNT_DOWN, func(reverse:bool = false):
+		sort_option.get_item_metadata(Sort.NAME_DOWN).call()
 		clear_item_nodes.call()
 		item_nodes.sort_custom(func(a, b) -> bool:
 			var result = 0

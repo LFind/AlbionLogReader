@@ -99,8 +99,7 @@ func append_logs(logs_new: Dictionary) -> Dictionary:
 		if not merged_logs.has(date):
 			merged_logs[date] = logs_new[date]
 	
-	log_data = merged_logs
-	Event.update_logs.emit()
+	self.log_data = merged_logs
 	save_log(PATH)
 	return merged_logs
 

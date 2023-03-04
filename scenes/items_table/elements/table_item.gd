@@ -41,8 +41,8 @@ func _update_visibility():
 		modulate.a = hidden_a if ItemData.is_hidden(item) else 1.0
 
 func _update():
+	_update_visibility()
 	if item != "":
-		_update_visibility()
 		self.entries = LogData.get_entries(self.item)
 		self.count = LogData.get_item_count(self.item)
 		self.last_change = LogData.find_latest_date(self.entries, self.item)
