@@ -78,7 +78,8 @@ script = ExtResource("1_v5wd4")
 metadata/_edit_horizontal_guides_ = [16.0, 464.0, 506.0]
 metadata/_edit_vertical_guides_ = [16.0, 544.0, 347.0]
 
-[node name="ButtonClearData" type="Button" parent="."]
+[node name="ButtonClearEntries" type="Button" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -97,7 +98,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_37cgm")
 theme_override_styles/hover = SubResource("StyleBoxFlat_i8svu")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_m3s74")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_cmu5d")
-disabled = true
 text = "Удалить все записи!"
 
 [node name="PanelColor" type="Panel" parent="."]

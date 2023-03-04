@@ -67,34 +67,13 @@ extends Panel
 
 var players:Array[String]
 var players_selected:Array[String]
-var item:String
+var item:String:
+	set(value):
+		item = value
+		_update_table()
 var is_ready:bool
 var count:int
-var data:Dictionary:
-	set(value):
-		data = value
-		
-		# Выставление заглушек на выборе диапозона дат
-		var date_min:Dictionary
-		var date_max:Dictionary
-		
-		for date in data.keys():
-			date = LogData.date_to_dict(date)
-			if date_max == {} or LogData.compare_datetime(date, date_min):
-				date_max = date
-			if date_min == {} or not LogData.compare_datetime(date, date_min):
-				date_min = date
-		
-		if date_min != {} and date_min != {}:
-			spin_box_begin_dd.get_line_edit().text = str(date_min["day"])
-			spin_box_begin_mm.get_line_edit().text = str(date_min["month"])
-			spin_box_begin_yy.get_line_edit().text = str(date_min["year"])
-			spin_box_end_dd.get_line_edit().text = str(date_max["day"])
-			spin_box_end_mm.get_line_edit().text = str(date_max["month"])
-			spin_box_end_yy.get_line_edit().text = str(date_max["year"])
-		
-		players = LogData.get_unique_players(data)
-		_update_table()
+var data:Dictionary
 
 
 func _ready():
@@ -147,11 +126,17 @@ func _ready():
 			_update_table()
 			)
 	
+	# Логика при со списоком игроков
 	player_list.item_selected.connect(func(index:int):
 		players_selected.clear()
 		# FIXME Множественный выбор игроков
 		for i in player_list.get_selected_items():
 			players_selected.append(player_list.get_item_text(i))
+		_update_table()
+		)
+	button_clear_player_select.pressed.connect(func():
+		players_selected.clear()
+		player_list.deselect_all()
 		_update_table()
 		)
 	
@@ -167,11 +152,7 @@ func _ready():
 		spin_textedit.alignment = HORIZONTAL_ALIGNMENT_CENTER
 		spin_textedit.size.x = 20
 	
-	button_clear_player_select.pressed.connect(func():
-		players_selected.clear()
-		player_list.deselect_all()
-		_update_table()
-		)
+	Event.removed_all_entries.connect(func(item): if self.item == item: _update_table())
 
 func _process(delta):
 	header_container.position.x = item_list_container.position.x
@@ -192,9 +173,31 @@ func _update_players():
 	player_list.sort_items_by_text()
 
 func _update_table():
-	_update_players()
+	self.data = LogData.get_entries(item)
+	players = LogData.get_unique_players(data)
+	
 	var data_filtred = data.duplicate(true)
 	count = 0
+	
+	# Выставление заглушек на выборе диапозона дат
+	var date_min:Dictionary
+	var date_max:Dictionary
+	
+	for date in data.keys():
+		date = LogData.date_to_dict(date)
+		if date_max == {} or LogData.compare_datetime(date, date_min):
+			date_max = date
+		if date_min == {} or not LogData.compare_datetime(date, date_min):
+			date_min = date
+	
+	if date_min != {} and date_min != {}:
+		spin_box_begin_dd.get_line_edit().text = str(date_min["day"])
+		spin_box_begin_mm.get_line_edit().text = str(date_min["month"])
+		spin_box_begin_yy.get_line_edit().text = str(date_min["year"])
+		spin_box_end_dd.get_line_edit().text = str(date_max["day"])
+		spin_box_end_mm.get_line_edit().text = str(date_max["month"])
+		spin_box_end_yy.get_line_edit().text = str(date_max["year"])
+	
 	
 	# Очистка каждого столбца
 	for column in columns.values():
@@ -246,6 +249,7 @@ func _update_table():
 			count += entry["countDelta"]
 			columns["countDelta"]["items"].add_item(str(entry["countDelta"]))
 	
+	_update_players()
 
 func _request_window_item_options():
 	Event.request_window_item_options.emit(item)
@@ -260,6 +264,5 @@ func _unhandled_input(event):
 		_release_focus()
 
 func set_item(item:String):
-	self.data = LogData.get_entries(item)
 	self.item = item
 

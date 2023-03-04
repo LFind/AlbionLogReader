@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cfy5dp4a3v7on"]
 
-[ext_resource type="Script" path="res://scenes/item_options/ItemOptionsPane.gd" id="1_4d2xp"]
+[ext_resource type="Script" path="res://scenes/items_table/SettingsPane.gd" id="1_0nc38"]
 [ext_resource type="Texture2D" uid="uid://r1plrsirowa8" path="res://textures/unknown_icon.png" id="2_uodqw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmu5d"]
@@ -65,7 +65,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-script = ExtResource("1_4d2xp")
+script = ExtResource("1_0nc38")
 metadata/_edit_horizontal_guides_ = [16.0, 464.0, 506.0]
 metadata/_edit_vertical_guides_ = [16.0, 544.0, 347.0]
 

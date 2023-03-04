@@ -11,6 +11,8 @@ extends Control
 @onready var spin_box_low = %SpinBoxLow
 @onready var spin_box_min = %SpinBoxMin
 
+@onready var button_clear_entries = %ButtonClearEntries
+
 var data:Dictionary
 var item:String
 var icon_filename:Dictionary
@@ -52,6 +54,11 @@ func _ready():
 		icon_file_field.text = filename
 		set_icon_preview(filename)
 		)
+	
+	button_clear_entries.pressed.connect(_remove_item_entries)
+
+func _remove_item_entries():
+	LogData.remove_all_entries(item)
 
 func set_icon_preview(filename:String):
 	icon_texture.texture = icon_filename.get(filename, icon_unknown)

@@ -119,6 +119,7 @@ func load_log(path:String) -> Dictionary:
 			data = str_to_var(text_value)
 		file.flush()
 	self.log_data = data
+	save_log(PATH)
 	return data
 
 
@@ -155,7 +156,7 @@ func get_entries(item_name: String, player: String = "", char: int = -1, quality
 				else:
 					entries[date].append(entry)
 	
-	return entries
+	return entries.duplicate(true)
 
 
 func get_unique_items(logs:Dictionary) -> Array:
@@ -245,6 +246,21 @@ func find_latest_date(log_data:Dictionary, item:String = "") -> Dictionary:
 					lastest_datetime = entry
 	
 	return last_datetime
+
+func remove_all_entries(item:String):
+	var log_data = self.log_data.duplicate()
+	for date in log_data.keys():
+		var entries = log_data[date].filter(func(e): return e["item"] != item)
+		
+		if entries.size() > 0:
+			log_data[date] = entries
+		else:
+			log_data.erase(date)
+		
+	
+	self.log_data = log_data
+	save_log(PATH)
+	Event.removed_all_entries.emit(item)
 
 func sort_by_date(logs:Dictionary) -> Dictionary:
 	var sorted_logs:Dictionary
