@@ -4,6 +4,8 @@ enum Key {
 	SHOW_HIDDEN
 }
 
+const TITLE = "AlbionLogReader"
+const VERSION = "0.7b"
 const PATH = "config.ini"
 
 var config:ConfigFile = ConfigFile.new()
@@ -11,6 +13,7 @@ var config:ConfigFile = ConfigFile.new()
 
 func _ready():
 	load_config()
+	get_window().title = "{title} v.{version}".format({"title":TITLE, "version":VERSION})
 
 func save_config(path:String = PATH):
 	config.save(path)
