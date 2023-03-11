@@ -1,7 +1,33 @@
-[gd_scene load_steps=9 format=3 uid="uid://cfy5dp4a3v7on"]
+[gd_scene load_steps=13 format=3 uid="uid://cfy5dp4a3v7on"]
 
 [ext_resource type="Script" path="res://scenes/items_table/SettingsPane.gd" id="1_0nc38"]
-[ext_resource type="Texture2D" uid="uid://r1plrsirowa8" path="res://textures/unknown_icon.png" id="2_uodqw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wi6gs"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 1
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j23rn"]
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 1
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnpw8"]
+bg_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 1
+shadow_offset = Vector2(3, 3)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmu5d"]
 bg_color = Color(0.368627, 0.133333, 0.133333, 1)
@@ -30,6 +56,15 @@ corner_radius_bottom_left = 15
 shadow_size = 1
 shadow_offset = Vector2(3, 3)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28533"]
+bg_color = Color(0.439216, 0.188235, 0.188235, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 1
+shadow_offset = Vector2(3, 3)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lly7"]
 bg_color = Color(0.141176, 0.141176, 0.141176, 1)
 corner_radius_top_left = 15
@@ -39,24 +74,33 @@ corner_radius_bottom_left = 15
 shadow_size = 1
 shadow_offset = Vector2(3, 3)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ynib"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5bg7x"]
 bg_color = Color(0.211765, 0.211765, 0.211765, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-anti_aliasing_size = 0.1
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_bottom = 3.0
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hvsx0"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0.211765, 0.211765, 0.211765, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jmise"]
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kyanm"]
+bg_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
 
 [node name="SettingPane" type="Panel"]
 anchors_preset = 15
@@ -64,12 +108,33 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
 script = ExtResource("1_0nc38")
-metadata/_edit_horizontal_guides_ = [16.0, 464.0, 506.0]
-metadata/_edit_vertical_guides_ = [16.0, 544.0, 347.0]
+metadata/_edit_horizontal_guides_ = [16.0]
+metadata/_edit_vertical_guides_ = [16.0, 544.0]
+
+[node name="ButtonClose" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 496.0
+offset_right = -344.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ButtonRed"
+theme_override_styles/normal = SubResource("StyleBoxFlat_wi6gs")
+theme_override_styles/hover = SubResource("StyleBoxFlat_j23rn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wnpw8")
+text = "Закрыть"
 
 [node name="ButtonClearData" type="Button" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -80,6 +145,7 @@ offset_right = -16.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
+tooltip_text = "Зажми CTRL+SHIFT!"
 focus_mode = 0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
@@ -87,7 +153,9 @@ theme_type_variation = &"ButtonRed"
 theme_override_styles/normal = SubResource("StyleBoxFlat_cmu5d")
 theme_override_styles/hover = SubResource("StyleBoxFlat_i8svu")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_m3s74")
-text = "Удалить все записи!"
+theme_override_styles/disabled = SubResource("StyleBoxFlat_28533")
+disabled = true
+text = "Удалить все логи!"
 
 [node name="PanelColor" type="Panel" parent="."]
 layout_mode = 1
@@ -126,7 +194,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 theme_override_font_sizes/font_size = 12
-text = "Количество предмета, при котором он начнет выделяться соответвующем цветом. Эти цвета можно переопределить в общих настройках."
+text = "При заданном количестве, предмет будет выделяться одним из цветов."
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -135,6 +203,22 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelColor/VBoxContainer/CenterContainer"]
 layout_mode = 2
+
+[node name="HBoxDefault" type="HBoxContainer" parent="PanelColor/VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelColor/VBoxContainer/CenterContainer/VBoxContainer/HBoxDefault"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Норма:"
+horizontal_alignment = 2
+
+[node name="ColorPickerDefault" type="ColorPickerButton" parent="PanelColor/VBoxContainer/CenterContainer/VBoxContainer/HBoxDefault"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 32)
+layout_mode = 2
+color = Color(1, 1, 1, 1)
 
 [node name="HBoxLow" type="HBoxContainer" parent="PanelColor/VBoxContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -146,10 +230,11 @@ mouse_filter = 1
 text = "Мало:"
 horizontal_alignment = 2
 
-[node name="SpinBoxLow" type="SpinBox" parent="PanelColor/VBoxContainer/CenterContainer/VBoxContainer/HBoxLow"]
+[node name="ColorPickerLow" type="ColorPickerButton" parent="PanelColor/VBoxContainer/CenterContainer/VBoxContainer/HBoxLow"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 32)
 layout_mode = 2
-max_value = 10000.0
+color = Color(0.509804, 0.247059, 0, 1)
 
 [node name="HBoxMin" type="HBoxContainer" parent="PanelColor/VBoxContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -161,12 +246,13 @@ mouse_filter = 1
 text = "Минимум:"
 horizontal_alignment = 2
 
-[node name="SpinBoxMin" type="SpinBox" parent="PanelColor/VBoxContainer/CenterContainer/VBoxContainer/HBoxMin"]
+[node name="ColorPickerMin" type="ColorPickerButton" parent="PanelColor/VBoxContainer/CenterContainer/VBoxContainer/HBoxMin"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 32)
 layout_mode = 2
-max_value = 10000.0
+color = Color(0.439216, 0.188235, 0.188235, 1)
 
-[node name="PanelIcon" type="Panel" parent="."]
+[node name="PanelUpdates" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -181,7 +267,7 @@ mouse_filter = 1
 theme_type_variation = &"PanelDark"
 theme_override_styles/panel = SubResource("StyleBoxFlat_7lly7")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelIcon"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelUpdates"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -190,63 +276,48 @@ offset_top = 8.0
 offset_right = -8.0
 offset_bottom = 205.0
 grow_horizontal = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="PanelIcon/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelUpdates/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
-text = "Иконка предмета"
+text = "Обновления"
 horizontal_alignment = 1
 
-[node name="PanelImage" type="Panel" parent="PanelIcon/VBoxContainer"]
-custom_minimum_size = Vector2(72, 72)
-layout_mode = 2
-size_flags_horizontal = 4
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_3ynib")
-
-[node name="IconTexture" type="TextureRect" parent="PanelIcon/VBoxContainer/PanelImage"]
+[node name="CheckSearch" type="CheckButton" parent="PanelUpdates/VBoxContainer"]
 unique_name_in_owner = true
-texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_uodqw")
-expand_mode = 1
-stretch_mode = 5
-metadata/_edit_lock_ = true
-
-[node name="IconFileField" type="LineEdit" parent="PanelIcon/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Имя файла..."
-alignment = 1
-select_all_on_focus = true
-caret_blink = true
-caret_blink_interval = 0.5
+focus_mode = 0
+text = "Поиск при запуске"
 
-[node name="LabelDescription" type="Label" parent="PanelIcon/VBoxContainer"]
+[node name="CheckInstall" type="CheckButton" parent="PanelUpdates/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Обновлять при
+закрытии"
+
+[node name="ButtonSearchUpdates" type="Button" parent="PanelUpdates/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_5bg7x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jmise")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kyanm")
+text = "Проверить обновления"
+
+[node name="LabelVersion" type="Label" parent="PanelUpdates/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 theme_override_font_sizes/font_size = 12
-text = "Все иконки должны находиться в папке \"icons\"."
+text = "Ошибка обновления.
+Сервер вернул код {response}"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="PanelNotes" type="Panel" parent="."]
+[node name="PanelGroups" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -261,7 +332,7 @@ mouse_filter = 1
 theme_type_variation = &"PanelDark"
 theme_override_styles/panel = SubResource("StyleBoxFlat_7lly7")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelNotes"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelGroups"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -273,62 +344,18 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="PanelNotes/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelGroups/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
-text = "Заметки"
+text = "Группировка предметов"
 horizontal_alignment = 1
 
-[node name="TextNote" type="TextEdit" parent="PanelNotes/VBoxContainer"]
-unique_name_in_owner = true
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelGroups/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-focus_mode = 1
-theme_override_styles/normal = SubResource("StyleBoxFlat_hvsx0")
-theme_override_styles/focus = SubResource("StyleBoxFlat_hvsx0")
-placeholder_text = "Место куда писать очень много буков..."
-context_menu_enabled = false
-virtual_keyboard_enabled = false
-wrap_mode = 1
-scroll_smooth = true
-caret_blink = true
-caret_blink_interval = 0.5
 
-[node name="PanelChecks" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 496.0
-offset_right = -344.0
-offset_bottom = -16.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme_type_variation = &"PanelDark"
-theme_override_styles/panel = SubResource("StyleBoxFlat_7lly7")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelChecks"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CheckHide" type="CheckButton" parent="PanelChecks/VBoxContainer"]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelGroups/VBoxContainer/ScrollContainer"]
 layout_mode = 2
-tooltip_text = "Предмет будет сокрыт в списке вещей."
-focus_mode = 0
-mouse_filter = 1
-mouse_default_cursor_shape = 2
-text = "Скрытый предмет"
 
 [node name="IconListPopup" type="ItemList" parent="."]
 unique_name_in_owner = true
@@ -359,3 +386,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_type_variation = &"PanelDarkGray"
+
+[node name="MissClickBlock" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

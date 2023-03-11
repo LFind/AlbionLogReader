@@ -1,126 +1,108 @@
 extends Control
 
-@onready var icon_texture = %IconTexture
-@onready var icon_list_popup = %IconListPopup
-@onready var icon_file_field = %IconFileField
+const LABEL_VERSION_TEXT_DEFAULT = "Текущая версия: v{version}"
+const LABEL_VERSION_TEXT_LATEST = "Установлена последняя версия: v{version}"
+const LABEL_VERSION_TEXT_OLD = "Доступна новая версия: v{version}"
+const LABEL_VERSION_TEXT_ERROR = "Ошибка обновления.\nСервер вернул код {response}"
 
-@onready var text_note = %TextNote
+@onready var miss_click_block = %MissClickBlock
 
-@onready var check_hide = %CheckHide
+@onready var check_search_updates = %CheckSearch
+@onready var check_install_updates = %CheckInstall
+@onready var button_updates_check = %ButtonSearchUpdates
+@onready var label_version = %LabelVersion
 
-@onready var spin_box_low = %SpinBoxLow
-@onready var spin_box_min = %SpinBoxMin
+@onready var color_picker_default = %ColorPickerDefault
+@onready var color_picker_low = %ColorPickerLow
+@onready var color_picker_min = %ColorPickerMin
+
+@onready var button_close = %ButtonClose
+@onready var button_clear_data = %ButtonClearData
+
+const DELAY = 0.15
 
 var data:Dictionary
 var item:String
 var icon_filename:Dictionary
 var icon_unknown = ImageTexture.create_from_image(Image.load_from_file(ItemData.UNKNOWN_ICON))
+var timer_delay = Timer.new()
 
 #TODO меню настроек
 func _ready():
-	icon_unknown.set_size_override(Vector2i(64,64))
-	icon_texture.set_texture(icon_unknown)
-	icon_file_field.clear()
-	icon_list_popup.clear()
+	visible = false
 	
-	text_note.clear()
+	# Открытие и закрытие панели
+	Event.request_window_settings.connect(_on_window_request)
+	button_close.pressed.connect(_on_close_requested)
 	
-	spin_box_low.value = 0
-	spin_box_min.value = 0
-	spin_box_low.apply()
-	spin_box_min.apply()
+	# Проверка обновлений
+	UpdateChecker.search_start.connect(_on_search_updates_start)
+	UpdateChecker.search_end.connect(_on_search_updates_end)
+	check_search_updates.toggled.connect(Settings.set_search_update_on_launch)
+	check_install_updates.toggled.connect(Settings.set_download_update)
+	button_updates_check.pressed.connect(UpdateChecker.check_updates)
+	label_version.text = LABEL_VERSION_TEXT_DEFAULT.format({
+		"version": Settings.VERSION
+	})
 	
-	icon_file_field.text_submitted.connect(func(text:String):
-		icon_file_field.text = icon_file_field.text.strip_edges()
-		
-		if icon_file_field.text in icon_filename.keys(): return
-		icon_file_field.clear()
-		)
-	icon_file_field.focus_exited.connect(func():
-		_update_icons_popup()
-		icon_file_field.text = icon_file_field.text.strip_edges()
-		
-		if icon_file_field.text in icon_filename.keys(): return
-		icon_file_field.clear()
-		)	
-	icon_file_field.focus_entered.connect(_update_icons_popup)
-	icon_file_field.text_changed.connect(func(text:String):
-		set_icon_preview(text)
-		_update_icons_popup()
-		)
-	icon_list_popup.item_selected.connect(func(index:int):
-		var filename = icon_list_popup.get_item_text(index)
-		icon_file_field.text = filename
-		set_icon_preview(filename)
-		)
+	# Выбор цветов для предметов
+	color_picker_default.popup_closed.connect(func(): Settings.set_color_default(color_picker_default.color))
+	color_picker_low.popup_closed.connect(func(): Settings.set_color_low(color_picker_low.color))
+	color_picker_min.popup_closed.connect(func(): Settings.set_color_min(color_picker_min.color))
+	
+	# Защита от случайного удаления логов
+	button_clear_data.disabled = true
+	
+	add_child(timer_delay)
+	timer_delay.autostart = false
+	timer_delay.timeout.connect(miss_click_block.set_visible.bind(false))
 
-func set_icon_preview(filename:String):
-	icon_texture.texture = icon_filename.get(filename, icon_unknown)
+func _on_search_updates_start():
+	button_updates_check.disabled = true
 
-func _update_icons_popup():
-	var text = icon_file_field.text.strip_edges()
-	icon_list_popup.deselect_all()
-	if text != "":
-		var icons_found:Array
-		
-		if text != "":
-			for file in icon_filename.keys():
-				if text in file:
-					icons_found.append(file)
-		
-		icon_list_popup.visible = icons_found.size() > 0
-		if icon_list_popup.visible:
-			icon_list_popup.clear()
-			for file in icons_found:
-				icon_list_popup.add_item(file, icon_filename[file])
-	elif icon_file_field.has_focus():
-		icon_list_popup.visible = true
-		icon_list_popup.clear()
-		for file in icon_filename.keys():
-			icon_list_popup.add_item(file, icon_filename[file])
-	else:
-		icon_list_popup.visible = false
+func _on_search_updates_end():
+	match UpdateChecker.get_status():
+		UpdateChecker.STATUS_LATEST:
+			label_version.text = LABEL_VERSION_TEXT_LATEST.format({
+				"version": Settings.VERSION
+			})
+		UpdateChecker.STATUS_OLD:
+			label_version.text = LABEL_VERSION_TEXT_OLD.format({
+				"version": UpdateChecker.get_latest_version()
+			})
+		UpdateChecker.STATUS_UNKNOWN:
+			label_version.text = LABEL_VERSION_TEXT_OLD.format({
+				"response": UpdateChecker.get_response()
+			})
 	
-	if icon_list_popup.visible:
-		icon_list_popup.size.y = clamp((icon_list_popup.item_count + 0.5) * 32, 32, 224)
-		icon_list_popup.size.x = icon_file_field.size.x
-		icon_list_popup.position.x = icon_file_field.get_global_transform().origin.x
-		icon_list_popup.position.y = icon_file_field.get_global_transform().origin.y + icon_file_field.size.y
+	button_updates_check.disabled = false
 
 func _update():
-	icon_texture.set_texture(ItemData.get_icon(item, Vector2i(64,64)))
-	icon_file_field.set_text(ItemData.get_icon_filename(item))
-	
-	icon_filename.clear()
-	for filename in ItemData.get_icons():
-		icon_filename[filename] = ItemData.get_icon_by_filename(filename, Vector2i(64,64))
-	
-	spin_box_low.set_value(ItemData.get_count_low(item))
-	spin_box_min.set_value(ItemData.get_count_min(item))
-	
-	check_hide.button_pressed = ItemData.is_hidden(item)
-	text_note.text = ItemData.get_note(item)
+	pass
 
 func _release_focus():
 	var focused_node:Control = get_window().gui_get_focus_owner()
 	if focused_node:
 		focused_node.release_focus()
 
+func _on_window_request():
+	set_visible(true)
+	miss_click_block.set_visible(true)
+	timer_delay.start(DELAY)
+	
+	color_picker_default.color = Settings.get_color_default()
+	color_picker_low.color = Settings.get_color_low()
+	color_picker_min.color = Settings.get_color_min()
+	
+	check_search_updates.button_pressed = Settings.get_search_update_on_launch()
+	check_install_updates.button_pressed = Settings.get_download_update()
+
 func _unhandled_input(event):
 	if event.is_action("ui_mouse_left"):
 		_release_focus()
+	if event.is_action("ui_unlock"):
+		# Блокировка кнопки удаления
+		button_clear_data.disabled = not event.is_action_pressed("ui_unlock", true)
 
 func _on_close_requested():
-	
-	ItemData.set_icon(item, icon_file_field.text if icon_file_field.text.strip_edges() in icon_filename.keys() else "")
-	ItemData.set_count_low(item, spin_box_low.value)
-	ItemData.set_count_min(item, spin_box_min.value)
-	ItemData.set_note(item, text_note.text)
-	ItemData.set_hidden(item, check_hide.button_pressed)
-	
-	Event.update_item_settings.emit(item)
-
-func set_item(item:String):
-	self.data = LogData.get_entries(item)
-	self.item = item
-	_update()
+	set_visible(false)
