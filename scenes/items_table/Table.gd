@@ -19,13 +19,12 @@ enum Sort {
 
 @onready var link_update = %LinkUpdate
 
-@onready var animation_player = %AnimationPlayer
-
 var item_nodes:Array[Node]
+
 
 func _ready():
 	Event.update_logs.connect(_update)
-	Event.new_release.connect(func():
+	UpdateChecker.new_release.connect(func():
 		link_update.visible = true
 		link_update.text = link_update.text.format({"version": UpdateChecker.get_latest_version()})
 		link_update.uri = UpdateChecker.get_latest_release_link()
@@ -43,7 +42,7 @@ func _ready():
 		Settings.set_show_hidden(button_show_hidden.button_pressed)
 		)
 	
-	button_settings.pressed.connect(animation_player.play.bind("switch"))
+	button_settings.pressed.connect(func(): Event.request_window_settings.emit())
 	
 	button_refresh.pressed.connect(reload)
 	

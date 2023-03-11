@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bgg4ybe3v23rw"]
+[gd_scene load_steps=13 format=3 uid="uid://bgg4ybe3v23rw"]
 
 [ext_resource type="Theme" uid="uid://bm4dl3c55ph6g" path="res://Theme.tres" id="1_jnm2q"]
 [ext_resource type="Script" path="res://scenes/items_table/Table.gd" id="2_77u6g"]
@@ -42,91 +42,6 @@ line_spacing = 0.0
 font_size = 10
 font_color = Color(1, 1, 1, 0.39)
 
-[sub_resource type="Animation" id="Animation_k5w7q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SettingPane:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 560)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TablePane:mouse_filter")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SettingPane:mouse_filter")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
-
-[sub_resource type="Animation" id="Animation_6qho4"]
-resource_name = "switch"
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SettingPane:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 560), Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TablePane:mouse_filter")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [1, 2]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SettingPane:mouse_filter")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.95, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [2, 1]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lssyq"]
-_data = {
-"RESET": SubResource("Animation_k5w7q"),
-"switch": SubResource("Animation_6qho4")
-}
-
 [node name="Table" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -137,6 +52,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_jnm2q")
 script = ExtResource("2_77u6g")
+metadata/_edit_vertical_guides_ = [560.0]
 
 [node name="TablePane" type="Panel" parent="."]
 custom_minimum_size = Vector2(350, 0)
@@ -421,7 +337,6 @@ mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_w4jkl")
 theme_override_styles/hover = SubResource("StyleBoxFlat_acpqm")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ge0i3")
-disabled = true
 text = "Настройки"
 
 [node name="ButtonAddLog" type="Button" parent="TablePane/VBoxContainer/Footer/HBoxContainer"]
@@ -461,15 +376,5 @@ label_settings = SubResource("LabelSettings_vywr4")
 horizontal_alignment = 1
 
 [node name="SettingPane" parent="." instance=ExtResource("5_kyjag")]
+visible = false
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-offset_bottom = 560.0
-grow_vertical = 0
-mouse_filter = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
-libraries = {
-"": SubResource("AnimationLibrary_lssyq")
-}
