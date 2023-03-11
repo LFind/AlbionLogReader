@@ -109,6 +109,14 @@ func save_log(path:String):
 	file.store_string(str(log_data))
 	file.flush()
 
+func clear_log(path:String = PATH):
+	if FileAccess.file_exists(path):
+		var file = FileAccess.open(path, FileAccess.READ_WRITE)
+		var file_back = FileAccess.open(path + ".backup", FileAccess.READ_WRITE)
+		file_back.store_string(file.get_as_text())
+		file.store_string("")
+		file.close()
+		file_back.close()
 
 func load_log(path:String) -> Dictionary:
 	var data:Dictionary = {}
