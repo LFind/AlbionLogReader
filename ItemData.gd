@@ -9,8 +9,10 @@ const COUNT_LOW = 20
 
 var items:Array[String]
 var items_data:ConfigFile = ConfigFile.new()
+var item_groups:Array[ItemGroup] = []
 
 func _ready():
+	ItemGroup.load_groups()
 	load_data()
 	Event.update_logs.connect(func():
 		load_data()
@@ -26,6 +28,15 @@ func load_data(path:String = PATH) -> Array[String]:
 
 func save_data(path:String = PATH):
 	items_data.save(path)
+
+func clear_data(path:String = PATH):
+	if FileAccess.file_exists(path):
+		var file = FileAccess.open(path, FileAccess.READ_WRITE)
+		var file_back = FileAccess.open(path + ".backup", FileAccess.READ_WRITE)
+		file_back.store_string(file.get_as_text())
+		file.store_string("")
+		file.close()
+		file_back.close()
 
 func append_items(items:Array):
 	items.sort()
