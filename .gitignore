@@ -22,3 +22,4 @@ items.ini
 config.ini
 icons/*
 groups.json
+*.backup
