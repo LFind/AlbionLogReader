@@ -19,6 +19,9 @@ const LABEL_VERSION_TEXT_ERROR = "Ошибка обновления.\nСерве
 @onready var button_close = %ButtonClose
 @onready var button_clear_data = %ButtonClearData
 
+@onready var panel_edit_groups = %PanelEditGroups
+@onready var panel_groups = %PanelGroups
+
 const DELAY = 0.15
 
 var data:Dictionary
@@ -30,6 +33,8 @@ var timer_delay = Timer.new()
 #TODO меню настроек
 func _ready():
 	visible = false
+	panel_edit_groups.visible = false
+	panel_groups.visible = true
 	
 	# Открытие и закрытие панели
 	Event.request_window_settings.connect(_on_window_request)
@@ -52,10 +57,20 @@ func _ready():
 	
 	# Защита от случайного удаления логов
 	button_clear_data.disabled = true
+	button_clear_data.pressed.connect(LogData.clear_log)
 	
+	# Защита от мисскликов при открытии
 	add_child(timer_delay)
 	timer_delay.autostart = false
 	timer_delay.timeout.connect(miss_click_block.set_visible.bind(false))
+	
+	# Обработка открытия редактора группы
+	panel_edit_groups.visibility_changed.connect(func():
+		var visible = panel_edit_groups.visible
+		button_close.visible = !visible
+		button_clear_data.visible = !visible
+		panel_groups.visible = !visible
+		)
 
 func _on_search_updates_start():
 	button_updates_check.disabled = true

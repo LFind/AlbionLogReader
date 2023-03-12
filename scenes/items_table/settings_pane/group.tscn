@@ -1,0 +1,133 @@
+[gd_scene load_steps=10 format=3 uid="uid://chl6awoy5vw14"]
+
+[ext_resource type="Script" path="res://scenes/items_table/settings_pane/group.gd" id="1_a78x0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1adni"]
+bg_color = Color(0.737255, 0.572549, 0.192157, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2s8ch"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqm2m"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbpb7"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m62r"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.368627, 0.133333, 0.133333, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5c8ks"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.623529, 0.254902, 0.25098, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x6frq"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.880582, 0.483425, 0.466988, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jcbw3"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.439216, 0.188235, 0.188235, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="GroupItem" type="HBoxContainer"]
+custom_minimum_size = Vector2(300, 20)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_horizontal = 15
+size_flags_vertical = 0
+script = ExtResource("1_a78x0")
+metadata/_edit_vertical_guides_ = [300.0]
+metadata/_edit_horizontal_guides_ = [48.0]
+
+[node name="Warn" type="Panel" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Будет удалено при закрытии!"
+theme_override_styles/panel = SubResource("StyleBoxFlat_1adni")
+
+[node name="ButtonName" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+mouse_filter = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_2s8ch")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bqm2m")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cbpb7")
+text = "Название группы"
+alignment = 0
+text_overrun_behavior = 3
+
+[node name="ButtonEdit" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_2s8ch")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bqm2m")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cbpb7")
+text = "Изменить"
+
+[node name="ButtonDelete" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+tooltip_text = "Зажми CTRL+SHIFT!"
+focus_mode = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_1m62r")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5c8ks")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_x6frq")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_jcbw3")
+disabled = true
+text = "Удалить"

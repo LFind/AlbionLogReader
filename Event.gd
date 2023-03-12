@@ -12,3 +12,5 @@ signal request_window_item_options(item_name:String)
 signal request_window_settings
 
 signal group_update_items(group_name:String)
+signal group_deleted(group:ItemGroup)
+signal groups_saved

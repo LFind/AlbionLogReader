@@ -39,6 +39,7 @@ enabled=PackedStringArray("res://addons/SmoothScroll/plugin.cfg", "res://addons/
 [gui]
 
 theme/custom="res://Theme.tres"
+timers/tooltip_delay_sec=0.1
 
 [input]
 

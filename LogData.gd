@@ -104,21 +104,22 @@ func append_logs(logs_new: Dictionary) -> Dictionary:
 	return merged_logs
 
 
-func save_log(path:String):
+func save_log(path:String = PATH):
 	var file = FileAccess.open(path,FileAccess.WRITE)
 	file.store_string(str(log_data))
 	file.flush()
 
+
 func clear_log(path:String = PATH):
 	if FileAccess.file_exists(path):
-		var file = FileAccess.open(path, FileAccess.READ_WRITE)
-		var file_back = FileAccess.open(path + ".backup", FileAccess.READ_WRITE)
-		file_back.store_string(file.get_as_text())
+		save_log(path + ".backup")
+		var file = FileAccess.open(path, FileAccess.WRITE)
 		file.store_string("")
-		file.close()
-		file_back.close()
+		file.flush()
+	load_log(path)
 
-func load_log(path:String) -> Dictionary:
+
+func load_log(path:String = PATH) -> Dictionary:
 	var data:Dictionary = {}
 	if FileAccess.file_exists(path):
 		var file = FileAccess.open(path,FileAccess.READ)

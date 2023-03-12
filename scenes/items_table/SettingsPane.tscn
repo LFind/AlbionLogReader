@@ -1,6 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://cfy5dp4a3v7on"]
+[gd_scene load_steps=22 format=3 uid="uid://tl4l7omt3a0p"]
 
 [ext_resource type="Script" path="res://scenes/items_table/SettingsPane.gd" id="1_0nc38"]
+[ext_resource type="Script" path="res://scenes/items_table/settings_pane/PanelGroups.gd" id="2_ggor1"]
+[ext_resource type="PackedScene" uid="uid://chl6awoy5vw14" path="res://scenes/items_table/settings_pane/group.tscn" id="2_vxo1s"]
+[ext_resource type="PackedScene" uid="uid://mvitlumb0lko" path="res://scenes/items_table/settings_pane/group_pattern.tscn" id="3_kjir4"]
+[ext_resource type="Script" path="res://scenes/items_table/settings_pane/PanelEditGroups.gd" id="3_u1fwp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wi6gs"]
 bg_color = Color(0.141176, 0.141176, 0.141176, 1)
@@ -75,32 +79,77 @@ shadow_size = 1
 shadow_offset = Vector2(3, 3)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5bg7x"]
+content_margin_left = 10.0
+content_margin_top = 3.0
+content_margin_right = 10.0
+content_margin_bottom = 3.0
 bg_color = Color(0.211765, 0.211765, 0.211765, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-expand_margin_bottom = 3.0
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 shadow_size = 1
 shadow_offset = Vector2(1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jmise"]
+content_margin_left = 10.0
+content_margin_top = 3.0
+content_margin_right = 10.0
+content_margin_bottom = 3.0
 bg_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_top = 3.0
 shadow_size = 1
 shadow_offset = Vector2(1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kyanm"]
+content_margin_left = 10.0
+content_margin_top = 3.0
+content_margin_right = 10.0
+content_margin_bottom = 3.0
 bg_color = Color(0.5, 0.5, 0.5, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 shadow_size = 1
 shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bude4"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.211765, 0.211765, 0.211765, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cvmnj"]
+content_margin_left = 8.0
+content_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0g73w"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_17ewm"]
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8eec"]
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="SettingPane" type="Panel"]
 anchors_preset = 15
@@ -318,6 +367,7 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="PanelGroups" type="Panel" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -331,6 +381,7 @@ grow_vertical = 2
 mouse_filter = 1
 theme_type_variation = &"PanelDark"
 theme_override_styles/panel = SubResource("StyleBoxFlat_7lly7")
+script = ExtResource("2_ggor1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelGroups"]
 layout_mode = 1
@@ -350,42 +401,209 @@ mouse_filter = 1
 text = "Группировка предметов"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelGroups/VBoxContainer"]
+[node name="Panel" type="Panel" parent="PanelGroups/VBoxContainer"]
+clip_contents = true
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_bude4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelGroups/VBoxContainer/ScrollContainer"]
-layout_mode = 2
-
-[node name="IconListPopup" type="ItemList" parent="."]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 296.0
-offset_top = -386.0
-offset_right = 296.0
-offset_bottom = -354.0
-grow_horizontal = 2
-focus_mode = 0
-fixed_icon_size = Vector2i(32, 32)
-metadata/_edit_lock_ = true
-
-[node name="Panel" type="Panel" parent="IconListPopup"]
-modulate = Color(1, 1, 1, 0.823529)
-show_behind_parent = true
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelGroups/VBoxContainer/Panel"]
+clip_contents = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 10.0
+offset_right = -4.0
+offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-theme_type_variation = &"PanelDarkGray"
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cvmnj")
+
+[node name="ContainerGroups" type="VBoxContainer" parent="PanelGroups/VBoxContainer/Panel/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TableItem" parent="PanelGroups/VBoxContainer/Panel/ScrollContainer/ContainerGroups" instance=ExtResource("2_vxo1s")]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="PanelGroups/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="ButtonCreateGroup" type="Button" parent="PanelGroups/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_5bg7x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jmise")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kyanm")
+text = "Создать группу"
+
+[node name="PanelEditGroups" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 248.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_type_variation = &"PanelDark"
+theme_override_styles/panel = SubResource("StyleBoxFlat_7lly7")
+script = ExtResource("3_u1fwp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelEditGroups"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="PanelEditGroups/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+text = "Изменить группу \"{name}\""
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelEditGroups/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelEditGroups/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Название:"
+
+[node name="LineGroupName" type="LineEdit" parent="PanelEditGroups/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_0g73w")
+theme_override_styles/focus = SubResource("StyleBoxFlat_17ewm")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_j8eec")
+placeholder_text = "Группа..."
+max_length = 64
+
+[node name="Control" type="Control" parent="PanelEditGroups/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelEditGroups/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -192.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Предмет"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="PanelEditGroups/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 328.0
+offset_right = -112.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Чары"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="PanelEditGroups/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 416.0
+offset_right = -21.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Качество"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="PanelEditGroups/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_bude4")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelEditGroups/VBoxContainer/Panel"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 10.0
+offset_right = -4.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cvmnj")
+
+[node name="ContainerGroupPatterns" type="VBoxContainer" parent="PanelEditGroups/VBoxContainer/Panel/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxGroupItem" parent="PanelEditGroups/VBoxContainer/Panel/ScrollContainer/ContainerGroupPatterns" instance=ExtResource("3_kjir4")]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="PanelEditGroups/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelEditGroups/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="ButtonSaveGroup" type="Button" parent="PanelEditGroups/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_5bg7x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jmise")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kyanm")
+text = "Сохранить"
+
+[node name="ButtonCreatePattern" type="Button" parent="PanelEditGroups/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_5bg7x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jmise")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kyanm")
+text = "Добавить предмет"
+
+[node name="ButtonCancel" type="Button" parent="PanelEditGroups/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_5bg7x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jmise")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kyanm")
+text = "Отмена"
 
 [node name="MissClickBlock" type="Control" parent="."]
 unique_name_in_owner = true

@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://addons/SmoothScroll/SmoothScrollContainer.gd" id="3_t3hwi"]
 [ext_resource type="Texture2D" uid="uid://b64os3fad7swk" path="res://textures/eye_hide.png" id="4_ab2fm"]
 [ext_resource type="PackedScene" uid="uid://c2v8yme3btu6f" path="res://scenes/items_table/elements/table_item.tscn" id="4_uhjrh"]
-[ext_resource type="PackedScene" uid="uid://cfy5dp4a3v7on" path="res://scenes/items_table/SettingsPane.tscn" id="5_kyjag"]
+[ext_resource type="PackedScene" uid="uid://tl4l7omt3a0p" path="res://scenes/items_table/SettingsPane.tscn" id="5_kyjag"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pwxes"]
 content_margin_left = 5.0
